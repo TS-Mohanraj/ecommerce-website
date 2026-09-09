@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 ```
-<title>MotoGear | Vehicle Parts & Accessories</title>
+<title>Sun Auto Centre | Two-Wheeler Accessories</title>
 
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +27,12 @@
         <div class="container">
 
             <a class="navbar-brand" href="#">
-                MotoGear
+                <img 
+                  src="../static/img/logo.png"
+                  alt="Sun Auto Centre Logo"
+                  class="logo"
+                >
+              
             </a>
 
             <button class="navbar-toggler" type="button"
@@ -54,7 +59,13 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cart">
+                         🛒 Cart (<span id="cart-count">0</span>)
+                        </a>
                     </li>
 
                 </ul>
@@ -69,27 +80,33 @@
 <!-- Hero Section -->
 <main>
 
+
     <section class="hero">
 
-        <div class="container text-center">
+    <div class="container text-center">
 
-            <h1>Welcome to MotoGear</h1>
+        <span class="hero-tag">WELCOME TO SUN AUTO CENTRE</span>
 
-            <p>
-                Your trusted shop for quality vehicle accessories,
-                lubricants, tools and genuine spare parts.
-            </p>
+        <h1>
+            Upgrade Your Ride.<br>
+            Ride With Confidence.
+        </h1>
 
-            <a href="#products" class="btn btn-warning btn-lg">
-                Shop Now
-            </a>
+        <p>
+            Discover quality motorcycle lubricants, accessories
+            and genuine products from trusted brands.
+        </p>
 
-        </div>
+        <a href="#products" class="btn btn-warning btn-lg hero-btn">
+            Explore Products
+        </a>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- Brands Section -->
+      <!-- Brands Section -->
     <section id="brands" class="brands-section">
 
         <div class="container">
@@ -98,28 +115,34 @@
 
             <div class="row text-center">
 
+             <!-- Castrol -->
+            <div class="col-md-3 col-6 mb-3">
+            
+                    <a href="products.html#castrol-products" class="brand-card">
+                           CASTROL
+                    </a>
+                
+            </div>
+
+            <!-- Motul -->
                 <div class="col-md-3 col-6 mb-3">
-                    <div class="brand-card">
-                        CASTROL
-                    </div>
+                    <a href="products.html#motul-products" class="brand-card">
+                          MOTUL
+                    </a>
                 </div>
 
-                <div class="col-md-3 col-6 mb-3">
-                    <div class="brand-card">
-                        MOTUL
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-6 mb-3">
-                    <div class="brand-card">
+            <!-- Hero -->
+               <div class="col-md-3 col-6 mb-3">
+                    <a href="products.html#hero-products" class="brand-card">
                         HERO
-                    </div>
+                     </a>
                 </div>
 
+            <!-- TVS -->
                 <div class="col-md-3 col-6 mb-3">
-                    <div class="brand-card">
+                    <a href="products.html#tvs-products" class="brand-card">
                         TVS
-                    </div>
+                    </a>
                 </div>
 
             </div>
@@ -138,7 +161,7 @@
 
             <div class="row">
 
-        <div class="col-md-4 mb-4">
+        <div id="castrol-product" class="col-md-4 mb-4">
 
         <div class="product-card">
 
@@ -164,11 +187,11 @@
          </div>
 
                 <!-- Chain Cleaner -->
-<div class="col-md-4 mb-4">
+<div id="motul-product" class="col-md-4 mb-4">
     <div class="product-card">
 
         <img 
-            src="../static/img/moto chain cleanser.webp"
+            src="../static/img/moto chain cleanser.jpg"
             alt="Motul Chain Cleaner"
             class="product-image"
         >
@@ -192,7 +215,7 @@
 
 
 <!-- Chain Lubricant -->
-<div class="col-md-4 mb-4">
+<div id="motul-chain-lubricant" class="col-md-4 mb-4">
     <div class="product-card">
 
         <img 
@@ -220,11 +243,11 @@
 
 
 <!-- Mobile Holder -->
-<div class="col-md-4 mb-4">
+ <div id="mobile-holder-product" class="col-md-4 mb-4">
     <div class="product-card">
 
         <img 
-            src="../static/img/mobile holder.jpg.jpg"
+            src="../static/img/mobile holder.jpg"
             alt="Motorcycle Mobile Holder"
             class="product-image"
         >
@@ -248,11 +271,11 @@
 
 
 <!-- Engine Guard -->
-<div class="col-md-4 mb-4">
+<div id="hero-product" class="col-md-4 mb-4">
     <div class="product-card">
 
         <img 
-            src="../static/img/engine-guard.jpg.jpg"
+            src="../static/img/engine-guard.jpg"
             alt="Motorcycle Engine Guard"
             class="product-image"
         >
@@ -276,11 +299,11 @@
 
 
 <!-- Visor -->
-<div class="col-md-4 mb-4">
+<div id="tvs-product" class="col-md-4 mb-4">
     <div class="product-card">
 
         <img 
-            src="../static/img/visor.jpg.jpg"
+            src="../static/img/visor.jpg"
             alt="Motorcycle Visor"
             class="product-image"
         >
@@ -303,10 +326,160 @@
 </div>
 
             </div>
+            <!-- View All Products Button -->
+        <div class="text-center mt-4">
+             <a href="products.html" class="btn btn-warning btn-lg">
+                View All Products
+             </a>
+        </div>
 
         </div>
 
     </section>
+    <!-- Why Choose MotoGear -->
+<section class="why-section">
+
+    <div class="container">
+
+        <h2 class="text-center mb-5">Why Choose MotoGear?</h2>
+
+        <div class="row text-center">
+
+            <div class="col-md-3 col-6 mb-4">
+                <div class="why-card">
+                    <h1>✓</h1>
+                    <h4>Genuine Products</h4>
+                    <p>Quality products from trusted brands.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6 mb-4">
+                <div class="why-card">
+                    <h1>⭐</h1>
+                    <h4>Trusted Brands</h4>
+                    <p>Products from leading motorcycle brands.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6 mb-4">
+                <div class="why-card">
+                    <h1>🛡️</h1>
+                    <h4>Quality Assured</h4>
+                    <p>Reliable products for your motorcycle.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6 mb-4">
+                <div class="why-card">
+                    <h1>💬</h1>
+                    <h4>Easy Ordering</h4>
+                    <p>Simple ordering through our website.</p>
+                </div>
+            </div>
+
+        </div>
+        
+
+    </div>
+        
+
+</section>
+     
+    <!-- Contact Section -->
+<section id="contact" class="contact-section">
+
+    <div class="container">
+
+        <h2 class="text-center mb-5">Contact Sun Auto Centre</h2>
+
+        <div class="row text-center">
+
+            <!-- Location -->
+            <div class="col-md-4 mb-4">
+                <div class="contact-card">
+
+                    <h1>📍</h1>
+                    <h4>Our Location</h4>
+
+                    <p>
+                        No. 18, Vandayar Building,<br>
+                        Gandhiji Road, Karanthai,<br>
+                        Thanjavur - 2
+                    </p>
+
+                </div>
+            </div>
+
+
+            <!-- Phone -->
+            <div class="col-md-4 mb-4">
+                <div class="contact-card">
+
+                    <h1>📞</h1>
+                    <h4>Call Us</h4>
+
+                    <p>+91 99765 59984</p>
+
+                    <a href="tel:+919976559984"
+                       class="btn btn-warning">
+                        Call Now
+                    </a>
+
+                </div>
+            </div>
+
+
+            <!-- WhatsApp -->
+            <div class="col-md-4 mb-4">
+                <div class="contact-card">
+
+                    <h1>💬</h1>
+                    <h4>WhatsApp Us</h4>
+
+                    <p>+91 99765 59984</p>
+
+                    <a href="https://wa.me/919976559984"
+                       class="btn btn-success"
+                       target="_blank">
+                        Chat on WhatsApp
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Opening Hours -->
+        <div class="row justify-content-center mt-4">
+
+            <div class="col-md-6 text-center">
+
+                <div class="contact-card">
+
+                    <h1>🕒</h1>
+
+                    <h4>Opening Hours</h4>
+
+                    <p>
+                        Monday - Saturday<br>
+                        9:00 AM - 9:00 PM
+                    </p>
+
+                    <p>
+                        Sunday<br>
+                        Contact for availability
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 </main>
 
@@ -315,17 +488,15 @@
 <footer>
 
     <div class="container text-center">
-
-        <h4>MotoGear</h4>
-
-        <p>
-            Vehicle Accessories & Genuine Spare Parts
-        </p>
+         <h4>SUN AUTO CENTRE</h4>
 
         <p>
-            © 2026 MotoGear. All Rights Reserved.
+           Two-Wheeler Accessories, Lubricants & Genuine Products
         </p>
 
+             <p>
+              © 2026 Sun Auto Centre. All Rights Reserved.
+             </p>
     </div>
 
 </footer>
