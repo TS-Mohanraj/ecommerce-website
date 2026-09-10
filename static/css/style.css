@@ -35,39 +35,57 @@ font-size: 16px;
 
 /* Hero Section */
 
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    background: linear-gradient(135deg, #111, #333);
-    color: white;
-    padding-top: 70px;
+/* ================================
+   HOME CAROUSEL
+================================ */
+
+.carousel-img {
+    height: 500px;
+    object-fit: cover;
 }
 
-.hero h1 {
-    font-size: 60px;
-    font-weight: bold;
-    margin: 20px 0;
+.carousel-caption {
+    bottom: 25%;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 25px;
+    border-radius: 10px;
 }
 
-.hero p {
+.carousel-caption h1 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.carousel-caption p {
     font-size: 20px;
-    max-width: 650px;
-    margin: auto;
-    margin-bottom: 30px;
-    color: #ddd;
 }
 
-.hero-tag {
-    color: #ffc107;
-    font-weight: bold;
-    letter-spacing: 2px;
-    font-size: 14px;
+.carousel-caption .btn {
+    font-weight: 600;
 }
 
-.hero-btn {
-    padding: 12px 30px;
-    font-weight: bold;
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .carousel-img {
+        height: 350px;
+    }
+
+    .carousel-caption {
+        bottom: 15%;
+        padding: 15px;
+    }
+
+    .carousel-caption h1 {
+        font-size: 24px;
+    }
+
+    .carousel-caption p {
+        font-size: 15px;
+    }
+
 }
 
 /* Brands Section */
@@ -669,24 +687,4 @@ html {
 .customer-details .form-control:focus {
     border-color: #ffc107;
     box-shadow: 0 0 0 0.15rem rgba(255, 193, 7, 0.25);
-}
-
-/* ================================
-   MY ORDERS NAVBAR
-================================ */
-
-.my-orders-link {
-    color: #ffffff !important;
-    font-weight: 500;
-    transition: 0.3s ease;
-}
-
-.my-orders-link:hover {
-    color: #ffc107 !important;
-    transform: translateY(-1px);
-}
-
-.my-orders-link.active {
-    color: #ffc107 !important;
-    font-weight: 600;
 }

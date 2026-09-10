@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
+
 <title>Sun Auto Centre | Two-Wheeler Accessories</title>
 
 <!-- Bootstrap CSS -->
@@ -14,13 +14,13 @@
 
 <!-- Custom CSS -->
 <link rel="stylesheet" href="../static/css/style.css">
-```
+
 
 </head>
 
 <body>
 
-```
+
 <!-- Navbar -->
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
@@ -67,10 +67,6 @@
                         🛒 Cart (<span id="cart-count">0</span>)
                         </a>
                     </li>
-                    <li class="nav-item"> 
-                    <a class="nav-link my-orders-link" href="myorders.html"> 
-                     📦 My Orders </a>
-                    </li>
 
                 </ul>
 
@@ -82,80 +78,141 @@
 
 
 <!-- Hero Section -->
-<main>
+<!-- ================= HERO CAROUSEL ================= -->
+
+<div id="homeCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#homeCarousel"
+                data-bs-slide-to="0" class="active"></button>
+
+        <button type="button" data-bs-target="#homeCarousel"
+                data-bs-slide-to="1"></button>
+
+        <button type="button" data-bs-target="#homeCarousel"
+                data-bs-slide-to="2"></button>
+    </div>
 
 
-    <section class="hero">
+    <!-- Carousel Images -->
+    <div class="carousel-inner">
 
-    <div class="container text-center">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <img src="static/img/carousel2.png"
+                 class="d-block w-100 carousel-img"
+                 alt="Sun Auto Centre">
+            
+            <div class="carousel-caption">
+                <h1>WELCOME TO SUN AUTO CENTRE</h1>
+                <p>Quality Products for Your Ride</p>
+                <a href="products.html" class="btn btn-warning">
+                    Shop Now
+                </a>
+            </div>
+        </div>
 
-        <span class="hero-tag">WELCOME TO SUN AUTO CENTRE</span>
 
-        <h1>
-            Upgrade Your Ride.<br>
-            Ride With Confidence.
-        </h1>
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <img src="static\img\carousal1.jpg"
+                 class="d-block w-100 carousel-img"
+                 alt="Bike Accessories">
 
-        <p>
-            Discover quality motorcycle lubricants, accessories
-            and genuine products from trusted brands.
-        </p>
+            <div class="carousel-caption">
+                <h1>UPGRADE YOUR RIDE</h1>
+                <p>Premium Accessories & Genuine Products</p>
+                <a href="products.html" class="btn btn-warning">
+                    Explore Products
+                </a>
+            </div>
+        </div>
 
-        <a href="#products" class="btn btn-warning btn-lg hero-btn">
-            Explore Products
-        </a>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+            <img src="static/img/carousel3.jpg"
+                 class="d-block w-100 carousel-img"
+                 alt="Engine Oils">
+
+            <div class="carousel-caption">
+                <h1>RIDE WITH CONFIDENCE</h1>
+                <p>Engine Oils, Chain Care & Bike Accessories</p>
+                <a href="products.html" class="btn btn-warning">
+                    View Products
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Carousel -->
+
+<!-- YOUR CAROUSEL CODE HERE -->
+
+
+<!-- Brands Section -->
+
+<section id="brands" class="brands-section">
+
+    <div class="container">
+
+        <h2 class="text-center mb-4">Our Brands</h2>
+
+        <div class="row text-center">
+
+            <div class="col-md-3 col-6 mb-3">
+                <a href="products.html#castrol-products" class="brand-card">
+                    CASTROL
+                </a>
+            </div>
+
+            <div class="col-md-3 col-6 mb-3">
+                <a href="products.html#motul-products" class="brand-card">
+                    MOTUL
+                </a>
+            </div>
+
+            <div class="col-md-3 col-6 mb-3">
+                <a href="products.html#hero-products" class="brand-card">
+                    HERO
+                </a>
+            </div>
+
+            <div class="col-md-3 col-6 mb-3">
+                <a href="products.html#tvs-products" class="brand-card">
+                    TVS
+                </a>
+            </div>
+
+        </div>
 
     </div>
 
 </section>
 
 
-      <!-- Brands Section -->
-    <section id="brands" class="brands-section">
+    <!-- Previous -->
+    <button class="carousel-control-prev"
+            type="button"
+            data-bs-target="#homeCarousel"
+            data-bs-slide="prev">
 
-        <div class="container">
-
-            <h2 class="text-center mb-4">Our Brands</h2>
-
-            <div class="row text-center">
-
-             <!-- Castrol -->
-            <div class="col-md-3 col-6 mb-3">
-            
-                    <a href="products.html#castrol-products" class="brand-card">
-                           CASTROL
-                    </a>
-                
-            </div>
-
-            <!-- Motul -->
-                <div class="col-md-3 col-6 mb-3">
-                    <a href="products.html#motul-products" class="brand-card">
-                          MOTUL
-                    </a>
-                </div>
-
-            <!-- Hero -->
-               <div class="col-md-3 col-6 mb-3">
-                    <a href="products.html#hero-products" class="brand-card">
-                        HERO
-                     </a>
-                </div>
-
-            <!-- TVS -->
-                <div class="col-md-3 col-6 mb-3">
-                    <a href="products.html#tvs-products" class="brand-card">
-                        TVS
-                    </a>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
+        <span class="carousel-control-prev-icon"></span>
+    </button>
 
 
+    <!-- Next -->
+    <button class="carousel-control-next"
+            type="button"
+            data-bs-target="#homeCarousel"
+            data-bs-slide="next">
+
+        <span class="carousel-control-next-icon"></span>
+    </button>
+
+</div>
     <!-- Products Section -->
     <section id="products" class="products-section">
 
@@ -509,7 +566,7 @@
 <!-- Bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../static/js/script.js"></script>
-```
+
 
 </body>
 
