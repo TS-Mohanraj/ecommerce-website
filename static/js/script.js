@@ -548,131 +548,177 @@ document.addEventListener(
 // ===============================
 // Place Order - WhatsApp
 // ===============================
-
 function placeOrder() {
 
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
     if (cart.length === 0) {
-
-        alert("Your cart is empty.");
-
+        alert("Your cart is empty!");
         return;
-
     }
 
+    const customerName =
+        document.getElementById("customer-name").value.trim();
 
-    const name =
-        document.getElementById("customer-name")
-            .value.trim();
+    const customerPhone =
+        document.getElementById("customer-phone").value.trim();
 
-
-    const phone =
-        document.getElementById("customer-phone")
-            .value.trim();
-
-
-    const address =
-        document.getElementById("customer-address")
-            .value.trim();
+    const customerAddress =
+        document.getElementById("customer-address").value.trim();
 
 
-    if (name === "") {
+    /* Validate customer details */
 
+    if (!customerName) {
         alert("Please enter your name.");
-
         return;
+    }
 
+    if (!/^[0-9]{10}$/.test(customerPhone)) {
+        alert("Please enter a valid 10-digit phone number.");
+        return;
+    }
+
+    if (!customerAddress) {
+        alert("Please enter your address.");
+        return;
     }
 
 
-    if (!/^[0-9]{10}$/.test(phone)) {
-
-        alert(
-            "Please enter a valid 10-digit mobile number."
-        );
-
-        return;
-
-    }
-
-
-    if (address === "") {
-
-        alert("Please enter your delivery address.");
-
-        return;
-
-    }
-
-
-    let message =
-        "🛒 *SUN AUTO CENTRE - NEW ORDER*%0A%0A";
-
-
-    message +=
-        "👤 *Customer Details*%0A";
-
-
-    message +=
-        "Name: " + name + "%0A";
-
-
-    message +=
-        "Mobile: " + phone + "%0A";
-
-
-    message +=
-        "Address: " + address + "%0A%0A";
-
-
-    message +=
-        "📦 *Order Details*%0A";
-
+    /* Calculate total */
 
     let total = 0;
 
+    cart.forEach(function (product) {
 
-    cart.forEach(function(product, index) {
+        total +=
+            Number(product.price) *
+            (Number(product.quantity) || 1);
 
-        const price = parseInt(
-            product.price.replace(/[^\d]/g, "")
-        );
+    });
 
+
+    /* Generate Order Number */
+
+    const orderNumber =
+        "SAC" + Date.now();
+
+
+    /* Order Date */
+
+    const orderDate = new Date();
+
+    const formattedDate =
+        orderDate.toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
+
+
+    /* Create Order Object */
+
+    const newOrder = {
+
+        orderNumber: orderNumber,
+
+        date: formattedDate,
+
+        customerName: customerName,
+
+        phone: customerPhone,
+
+        address: customerAddress,
+
+        products: cart.map(function (product) {
+
+            return {
+
+                name: product.name,
+
+                price: Number(product.price),
+
+                quantity: Number(product.quantity) || 1
+
+            };
+
+        }),
+
+        total: total,
+
+        status: "Placed"
+
+    };
+
+
+    /* =====================================
+       SAVE ORDER TO LOCAL STORAGE
+    ===================================== */
+
+    let orders =
+        JSON.parse(localStorage.getItem("orders")) || [];
+
+
+    orders.push(newOrder);
+
+
+    localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
+    );
+
+
+    /* =====================================
+       WHATSAPP MESSAGE
+    ===================================== */
+
+    let message =
+        "🚗 *NEW ORDER - SUN AUTO CENTRE*%0A%0A";
+
+    message +=
+        "*Order No:* #" + orderNumber + "%0A";
+
+    message +=
+        "*Customer:* " + customerName + "%0A";
+
+    message +=
+        "*Phone:* " + customerPhone + "%0A";
+
+    message +=
+        "*Address:* " + customerAddress + "%0A%0A";
+
+
+    message += "*PRODUCTS*%0A";
+    message += "------------------------%0A";
+
+
+    cart.forEach(function (product) {
 
         const quantity =
-            product.quantity || 1;
+            Number(product.quantity) || 1;
 
-
-        const subtotal =
-            price * quantity;
-
-
-        total += subtotal;
-
+        const itemTotal =
+            Number(product.price) * quantity;
 
         message +=
-            (index + 1) +
-            ". " +
             product.name +
-            " × " +
+            " x " +
             quantity +
-            " - ₹" +
-            subtotal.toLocaleString("en-IN") +
+            " = ₹" +
+            itemTotal +
             "%0A";
 
     });
 
 
-    message +=
-        "%0A💰 *Total: ₹" +
-        total.toLocaleString("en-IN") +
-        "*";
+    message += "%0A*Total: ₹" + total + "*%0A";
 
 
-    // Sun Auto Centre WhatsApp Number
+    /* =====================================
+       OPEN WHATSAPP
+    ===================================== */
 
-    const whatsappNumber =
-        "918072289426";
-
+    const whatsappNumber = "918072289426";
 
     const whatsappURL =
         "https://wa.me/" +
@@ -687,13 +733,76 @@ function placeOrder() {
     );
 
 
+    /* =====================================
+       CLEAR CART AFTER ORDER
+    ===================================== */
+
     localStorage.removeItem("cart");
 
-    cart = [];
+
+    /* Update cart */
+
+    if (typeof updateCartCount === "function") {
+        updateCartCount();
+    }
+
+    if (typeof displayCart === "function") {
+        displayCart();
+    }
 
 
-    updateCartCount();
+    /* Success message */
 
-    displayCart();
+    alert(
+        "Order placed successfully!\n\n" +
+        "Order Number: #" +
+        orderNumber
+    );
+
+
+    /* Go to My Orders */
+
+    setTimeout(function () {
+
+        window.location.href = "myorders.html";
+
+    }, 1000);
 
 }
+
+javascript
+function updateMyOrdersCount() {
+
+    const orders =
+        JSON.parse(localStorage.getItem("orders")) || [];
+
+    const ordersLink =
+        document.querySelector(".my-orders-link");
+
+    if (!ordersLink) {
+        return;
+    }
+
+    if (orders.length > 0) {
+
+        ordersLink.innerHTML =
+            `📦 My Orders (${orders.length})`;
+
+    } else {
+
+        ordersLink.innerHTML =
+            `📦 My Orders`;
+
+    }
+}
+
+
+/* Run when page loads */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    updateMyOrdersCount();
+
+});
+
+

@@ -670,3 +670,23 @@ html {
     border-color: #ffc107;
     box-shadow: 0 0 0 0.15rem rgba(255, 193, 7, 0.25);
 }
+
+/* ================================
+   MY ORDERS NAVBAR
+================================ */
+
+.my-orders-link {
+    color: #ffffff !important;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.my-orders-link:hover {
+    color: #ffc107 !important;
+    transform: translateY(-1px);
+}
+
+.my-orders-link.active {
+    color: #ffc107 !important;
+    font-weight: 600;
+}
