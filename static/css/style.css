@@ -72,18 +72,16 @@ font-size: 16px;
 
 /* Brands Section */
 
-.brands-section {
-padding: 80px 0;
-background-color: white;
-}
 .brand-card {
-padding: 30px;
-background-color: #111;
-color: #ffc107;
-font-size: 22px;
-font-weight: bold;
-border-radius: 10px;
-transition: 0.3s;
+    display: block;
+    padding: 30px;
+    background-color: #111;
+    color: #ffc107;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: 0.3s;
+    text-decoration: none;
 }
 
 .brand-card:hover {
@@ -232,4 +230,44 @@ html {
     .hero h1 {
         font-size: 36px;
     }
+}
+/* Our Brands & Popular Products Headings */
+
+.brands-section h2,
+.products-section > .container > h2 {
+    font-family: Arial, sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #111;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+/* Yellow underline */
+
+.brands-section h2::after,
+.products-section > .container > h2::after {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 4px;
+    background: #ffc107;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .brands-section h2,
+    .products-section > .container > h2 {
+        font-size: 30px;
+    }
+
 }
