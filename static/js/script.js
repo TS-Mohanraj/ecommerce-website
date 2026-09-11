@@ -1,4 +1,124 @@
 // ===============================
+// Load Products from API
+// ===============================
+async function loadProducts() {
+    try {
+
+        const response = await fetch("/api/products");
+        const products = await response.json();
+
+        const container =
+            document.getElementById("products-container");
+
+        if (!container) {
+            return;
+        }
+
+        container.innerHTML = "";
+
+        // Group products by brand
+        const brands = {
+            CASTROL: "castrol-products",
+            MOTUL: "motul-products",
+            HERO: "hero-products",
+            TVS: "tvs-products",
+            ACCESSORIES: "accessories-products"
+        };
+
+        Object.keys(brands).forEach(function(brand) {
+
+            const brandProducts =
+                products.filter(function(product) {
+                    return product.brand === brand;
+                });
+
+            if (brandProducts.length === 0) {
+                return;
+            }
+
+            // Brand Section
+            const section = document.createElement("div");
+
+            section.id = brands[brand];
+            section.className = "brand-product-section";
+
+            section.innerHTML = `
+                <h2 class="text-center mb-4">
+                    ${brand}
+                </h2>
+            `;
+
+            // Product Row
+            const row = document.createElement("div");
+            row.className = "row";
+
+            brandProducts.forEach(function(product) {
+
+                const productHTML = `
+                    <div class="col-md-4 mb-4">
+                        <div class="product-card">
+
+                            <img
+                                src="../static/img/${product.image}"
+                                alt="${product.name}"
+                                class="product-image"
+                            >
+
+                            <span class="product-brand">
+                                ${product.brand}
+                            </span>
+
+                            <h4>${product.name}</h4>
+
+                            <p>${product.description}</p>
+
+                            <h5>
+                                ${
+                                    product.price !== null
+                                        ? "₹" + product.price.toLocaleString("en-IN")
+                                        : "Contact for Price"
+                                }
+                            </h5>
+
+                            <button class="btn btn-warning add-cart">
+                                Add to Cart
+                            </button>
+
+                        </div>
+                    </div>
+                `;
+
+                row.innerHTML += productHTML;
+            });
+
+            section.appendChild(row);
+            container.appendChild(section);
+        });
+
+        // Add cart functionality
+        const addCartButtons =
+            container.querySelectorAll(".add-cart");
+
+        addCartButtons.forEach(function(button) {
+
+            button.addEventListener("click", function() {
+
+                addToCart(this);
+
+            });
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Error loading products:",
+            error
+        );
+
+    }
+}
+// ===============================
 // Shopping Cart
 // ===============================
 
@@ -495,25 +615,8 @@ document.addEventListener(
         );
 
 
-        // Add to Cart Buttons
-
-        const addCartButtons =
-            document.querySelectorAll(".add-cart");
-
-
-        addCartButtons.forEach(function(button) {
-
-            button.addEventListener(
-                "click",
-                function() {
-
-                    addToCart(this);
-
-                }
-            );
-
-        });
-
+// Load Products from API
+           loadProducts();
 
         // Update Cart
 
