@@ -47,7 +47,7 @@
                 <ul class="navbar-nav ms-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
+                        <a class="nav-link" href="#">Home</a>
                     </li>
 
                     <li class="nav-item">
@@ -63,7 +63,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="cart.html">
+                        <a class="nav-link cart-link" href="cart.html">
                         🛒 Cart (<span id="cart-count">0</span>)
                         </a>
                     </li>
@@ -80,18 +80,33 @@
 <!-- Hero Section -->
 <!-- ================= HERO CAROUSEL ================= -->
 
-<div id="homeCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+<!-- Hero Section -->
+<!-- ================= HERO CAROUSEL ================= -->
+
+<div id="homeCarousel"
+     class="carousel slide"
+     data-bs-ride="carousel"
+     data-bs-interval="3000">
 
     <!-- Indicators -->
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#homeCarousel"
-                data-bs-slide-to="0" class="active"></button>
 
-        <button type="button" data-bs-target="#homeCarousel"
-                data-bs-slide-to="1"></button>
+        <button type="button"
+                data-bs-target="#homeCarousel"
+                data-bs-slide-to="0"
+                class="active">
+        </button>
 
-        <button type="button" data-bs-target="#homeCarousel"
-                data-bs-slide-to="2"></button>
+        <button type="button"
+                data-bs-target="#homeCarousel"
+                data-bs-slide-to="1">
+        </button>
+
+        <button type="button"
+                data-bs-target="#homeCarousel"
+                data-bs-slide-to="2">
+        </button>
+
     </div>
 
 
@@ -100,52 +115,55 @@
 
         <!-- Slide 1 -->
         <div class="carousel-item active">
-            <img src="static/img/carousel2.png"
+            <img src="../static/img/carousal1.png"
                  class="d-block w-100 carousel-img"
                  alt="Sun Auto Centre">
-            
-            <div class="carousel-caption">
-                <h1>WELCOME TO SUN AUTO CENTRE</h1>
-                <p>Quality Products for Your Ride</p>
-                <a href="products.html" class="btn btn-warning">
-                    Shop Now
-                </a>
-            </div>
         </div>
 
 
         <!-- Slide 2 -->
         <div class="carousel-item">
-            <img src="static\img\carousal1.jpg"
+            <img src="../static/img/carousal2.png"
                  class="d-block w-100 carousel-img"
                  alt="Bike Accessories">
-
-            <div class="carousel-caption">
-                <h1>UPGRADE YOUR RIDE</h1>
-                <p>Premium Accessories & Genuine Products</p>
-                <a href="products.html" class="btn btn-warning">
-                    Explore Products
-                </a>
-            </div>
         </div>
 
 
         <!-- Slide 3 -->
         <div class="carousel-item">
-            <img src="static/img/carousel3.jpg"
+            <img src="../static/img/carousal3.png"
                  class="d-block w-100 carousel-img"
-                 alt="Engine Oils">
-
-            <div class="carousel-caption">
-                <h1>RIDE WITH CONFIDENCE</h1>
-                <p>Engine Oils, Chain Care & Bike Accessories</p>
-                <a href="products.html" class="btn btn-warning">
-                    View Products
-                </a>
-            </div>
+                 alt="Bike Products">
         </div>
 
     </div>
+
+
+    <!-- Previous Button -->
+    <button class="carousel-control-prev"
+            type="button"
+            data-bs-target="#homeCarousel"
+            data-bs-slide="prev">
+
+        <span class="carousel-control-prev-icon"></span>
+
+    </button>
+
+
+    <!-- Next Button -->
+    <button class="carousel-control-next"
+            type="button"
+            data-bs-target="#homeCarousel"
+            data-bs-slide="next">
+
+        <span class="carousel-control-next-icon"></span>
+
+    </button>
+
+</div>
+
+
+<!-- Brands Section -->
 
     <!-- Carousel -->
 

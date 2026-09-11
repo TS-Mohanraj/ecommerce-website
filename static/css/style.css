@@ -17,22 +17,102 @@ background-color: #f5f5f5;
 
 /* Navbar */
 
+/* ================= MODERN NAVBAR ================= */
+
 .navbar {
-background-color: #111;
-padding: 15px 0;
+    background: #111 !important;
+    padding: 12px 30px;
+    border-bottom: 1px solid rgba(255, 193, 7, 0.25);
 }
 
-.navbar-brand {
-font-size: 26px;
-font-weight: bold;
-color: #ffc107 !important;
+.navbar-brand img {
+    height: 65px;
+    width: auto;
 }
 
-.nav-link {
-margin-left: 15px;
-font-size: 16px;
+/* Menu */
+.navbar-nav {
+    gap: 8px;
+    align-items: center;
 }
 
+.navbar-nav .nav-link {
+    position: relative;
+    color: #ddd !important;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 16px !important;
+    transition: 0.3s ease;
+}
+
+/* Hover */
+.navbar-nav .nav-link:hover {
+    color: #ffc107 !important;
+}
+
+/* Animated underline */
+.navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 4px;
+    width: 0;
+    height: 2px;
+    background: #ffc107;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+    width: 65%;
+}
+
+/* Active */
+.navbar-nav .nav-link.active {
+    color: #ffc107 !important;
+}
+
+/* Cart */
+.navbar-nav .cart-link {
+    background: #ffc107;
+    color: #111 !important;
+    border-radius: 25px;
+    padding: 9px 18px !important;
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+.navbar-nav .cart-link:hover {
+    background: #fff;
+    color: #111 !important;
+}
+
+.navbar-nav .cart-link::after {
+    display: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 15px;
+    }
+
+    .navbar-nav {
+        gap: 2px;
+        margin-top: 10px;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 10px !important;
+    }
+
+    .navbar-nav .cart-link {
+        margin-left: 0;
+        margin-top: 5px;
+        display: inline-block;
+    }
+}
 /* Hero Section */
 
 /* ================================
@@ -40,9 +120,12 @@ font-size: 16px;
 ================================ */
 
 .carousel-img {
-    height: 500px;
-    object-fit: cover;
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
 }
+
 
 .carousel-caption {
     bottom: 25%;
@@ -100,7 +183,13 @@ font-size: 16px;
     border-radius: 10px;
     transition: 0.3s;
     text-decoration: none;
+
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    pointer-events: auto;
 }
+
 
 .brand-card:hover {
 transform: translateY(-8px);
