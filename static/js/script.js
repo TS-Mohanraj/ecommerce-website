@@ -4,15 +4,29 @@
 async function loadProducts() {
     try {
 
-        const response = await fetch("http://localhost:3000/api/products");
+        const response = await fetch("/api/products");
         const products = await response.json();
 
         const container =
             document.getElementById("products-container");
 
-        if (!container) {
-            return;
-        }
+       if (!container) {
+
+      const addCartButtons =
+        document.querySelectorAll(".add-cart");
+
+    addCartButtons.forEach(function(button) {
+
+        button.addEventListener("click", function() {
+
+            addToCart(this);
+
+        });
+
+    });
+
+    return;
+}
 
         container.innerHTML = "";
 
@@ -97,7 +111,7 @@ async function loadProducts() {
 
         // Add cart functionality
         const addCartButtons =
-            container.querySelectorAll(".add-cart");
+            document.querySelectorAll(".add-cart");
 
         addCartButtons.forEach(function(button) {
 

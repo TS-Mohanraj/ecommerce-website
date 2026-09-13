@@ -201,152 +201,639 @@ transform: translateY(-8px);
 padding: 80px 0;
 }
 
+/* =================================
+   PREMIUM PRODUCT CARDS
+================================= */
+
 .product-card {
     background: #ffffff;
     padding: 22px;
-    border-radius: 14px;
+    border-radius: 16px;
     height: 100%;
-    border: 1px solid #eeeeee;
+    border: 1px solid #e5e5e5;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+
+    transition: transform 0.35s ease,
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
+
     position: relative;
     overflow: hidden;
 }
 
+/* Yellow top accent */
+.product-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #ffc107;
+
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+}
+
+/* Card Hover */
 .product-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    transform: translateY(-10px);
+    border-color: #ffc107;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.15),
+        0 0 15px rgba(255, 193, 7, 0.15);
 }
 
-.product-card h4 {
-margin-bottom: 15px;
-font-weight: bold;
+/* Top yellow line appears */
+.product-card:hover::before {
+    transform: scaleX(1);
 }
 
-.product-card p {
-color: #666;
-}
 
-/* Footer */
+/* =================================
+   PRODUCT IMAGE
+================================= */
 
-footer {
-background-color: #111;
-color: white;
-padding: 40px 0;
-}
-
-footer h4 {
-color: #ffc107;
-margin-bottom: 10px;
-}
 .product-image {
     width: 100%;
-    height: 220px;
+    height: 240px;
+
     object-fit: contain;
-    margin-bottom: 20px;
+
+    margin-bottom: 18px;
+
+    transition: transform 0.4s ease;
 }
+
+/* Image Zoom */
+.product-card:hover .product-image {
+    transform: scale(1.08);
+}
+
+
+/* =================================
+   BRAND BADGE
+================================= */
 
 .product-brand {
-    font-size: 13px;
-    font-weight: bold;
-    color: #ffc107;
+    display: inline-block;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: #111;
+    background: #ffc107;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
     letter-spacing: 1px;
-    display: block;
-    margin-bottom: 8px;
+
+    margin-bottom: 10px;
 }
 
-.product-card h5 {
+
+/* =================================
+   PRODUCT NAME
+================================= */
+
+.product-card h4 {
+    margin-bottom: 10px;
+
     font-size: 20px;
+    font-weight: 700;
+
+    color: #111;
+
+    transition: color 0.3s ease;
+}
+
+.product-card:hover h4 {
+    color: #d99f00;
+}
+
+
+/* =================================
+   PRODUCT DESCRIPTION
+================================= */
+
+.product-card p {
+    color: #666;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    min-height: 45px;
+
     margin-bottom: 15px;
 }
+
+
+/* =================================
+   PRICE
+================================= */
+
+.product-card h5 {
+    font-size: 22px;
+
+    font-weight: 800;
+
+    color: #111;
+
+    margin-bottom: 15px;
+}
+
+
+/* =================================
+   ADD TO CART BUTTON
+================================= */
+
+.product-card .btn {
+    width: 100%;
+
+    padding: 11px;
+
+    font-weight: 700;
+
+    border-radius: 8px;
+
+    border: 2px solid #ffc107;
+
+    transition: all 0.3s ease;
+}
+
+.product-card .btn:hover {
+    background: #111;
+    color: #ffc107;
+
+    border-color: #111;
+
+    transform: translateY(-2px);
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 768px) {
+
+    .product-card {
+        padding: 18px;
+    }
+
+    .product-image {
+        height: 210px;
+    }
+
+    .product-card h4 {
+        font-size: 18px;
+    }
+
+    .product-card p {
+        font-size: 13px;
+    }
+
+    .product-card h5 {
+        font-size: 20px;
+    }
+}
+
+
+
+/* =========================
+   PREMIUM PRODUCT CARDS
+========================= */
+
+.product-card {
+    background: #ffffff;
+    padding: 22px;
+    border-radius: 16px;
+    height: 100%;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #ffc107;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    border-color: #ffc107;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.product-card:hover::before {
+    transform: scaleX(1);
+}
+
 .product-image {
     width: 100%;
     height: 240px;
     object-fit: contain;
     margin-bottom: 18px;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 
 .product-card:hover .product-image {
-    transform: scale(1.05);
+    transform: scale(1.08);
+}
+
+.product-brand {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #111;
+    background: #ffc107;
+    padding: 5px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.product-card h4 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+}
+
+.product-card:hover h4 {
+    color: #d99f00;
+}
+
+.product-card p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 45px;
+    margin-bottom: 15px;
+}
+
+.product-card h5 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 15px;
+}
+
+.product-card .btn {
+    width: 100%;
+    padding: 11px;
+    font-weight: 700;
+    border-radius: 8px;
+    border: 2px solid #ffc107;
+    transition: all 0.3s ease;
+}
+
+.product-card .btn:hover {
+    background: #111;
+    color: #ffc107;
+    border-color: #111;
+    transform: translateY(-2px);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .product-card {
+        padding: 18px;
+    }
+
+    .product-image {
+        height: 210px;
+    }
+
+    .product-card h4 {
+        font-size: 18px;
+    }
+
+    .product-card p {
+        font-size: 13px;
+    }
+
+    .product-card h5 {
+        font-size: 20px;
+    }
 }
 
 /* Why Choose Section */
+/* =========================
+   UNIQUE WHY CHOOSE SECTION
+========================= */
 
 .why-section {
-    padding: 80px 0;
-    background-color: #f5f5f5;
+    padding: 90px 0;
+    background: #111;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Background design */
+.why-section::before {
+    content: "";
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border: 1px solid rgba(255, 193, 7, 0.12);
+    border-radius: 50%;
+    top: -250px;
+    right: -120px;
+}
+
+.why-section::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(255, 193, 7, 0.08);
+    border-radius: 50%;
+    bottom: -180px;
+    left: -100px;
+}
+
+.why-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Heading */
+.why-section h2 {
+    color: #ffffff;
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 55px !important;
+}
+
+/* Cards */
 .why-card {
-    background-color: white;
-    padding: 30px 20px;
-    border-radius: 10px;
+    background: #1b1b1b;
+    padding: 35px 20px;
     height: 100%;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    transition: 0.3s;
+    border: 1px solid #292929;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+/* Yellow side line */
+.why-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 0;
+    background: #ffc107;
+    transition: height 0.4s ease;
 }
 
 .why-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
+    border-color: #ffc107;
+    background: #202020;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
 }
 
-.why-card h1 {
-    font-size: 40px;
-}
-
-.why-card h4 {
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-.why-card p {
-    color: #666;
-    margin-top: 10px;
-}
-.logo {
-    width: 200px;
-    height: 65px;
-    object-fit: contain;
-}
-html {
-    scroll-behavior: smooth;
-}
-/* Contact Section */
-
-.contact-section {
-    padding: 80px 0;
-    background-color: #ffffff;
-}
-
-.contact-card {
-    background-color: #f8f9fa;
-    padding: 30px 20px;
-    border-radius: 12px;
+.why-card:hover::before {
     height: 100%;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    transition: 0.3s;
 }
 
-.contact-card:hover {
-    transform: translateY(-8px);
+/* Icons */
+.why-card h1 {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffc107;
+    color: #111;
+
+    border-radius: 50%;
+    font-size: 30px;
+    font-weight: 800;
+
+    transition: all 0.4s ease;
 }
 
-.contact-card h1 {
-    font-size: 35px;
+.why-card:hover h1 {
+    transform: scale(1.12) rotate(-8deg);
+    box-shadow: 0 0 0 8px rgba(255, 193, 7, 0.10);
 }
 
-.contact-card h4 {
-    font-weight: bold;
-    margin: 15px 0;
+/* Title */
+.why-card h4 {
+    color: #ffffff;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0 0 12px;
 }
-/* Mobile Responsive */
+
+/* Description */
+.why-card p {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 36px;
+
+    .why-section {
+        padding: 65px 0;
+    }
+
+    .why-section h2 {
+        font-size: 29px;
+        margin-bottom: 35px !important;
+    }
+
+    .why-card {
+        padding: 28px 15px;
+    }
+
+    .why-card h1 {
+        width: 55px;
+        height: 55px;
+        font-size: 25px;
+    }
+
+    .why-card h4 {
+        font-size: 17px;
+    }
+
+    .why-card p {
+        font-size: 13px;
     }
 }
+
+/* Contact Section */
+
+/* =========================
+   PREMIUM CONTACT SECTION
+========================= */
+
+#contact {
+    background: #f8f9fa;
+    padding: 80px 0;
+}
+
+#contact h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 12px;
+}
+
+#contact > .container > p {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 45px;
+}
+
+/* Contact Cards */
+#contact .contact-card {
+    background: #ffffff;
+    padding: 30px 25px;
+    border-radius: 16px;
+    border: 1px solid #e8e8e8;
+    height: 100%;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Top yellow line */
+#contact .contact-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #ffc107;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+}
+
+#contact .contact-card:hover {
+    transform: translateY(-8px);
+    border-color: #ffc107;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+#contact .contact-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Icons */
+#contact .contact-card i {
+    font-size: 30px;
+    color: #ffc107;
+    margin-bottom: 18px;
+    transition: transform 0.3s ease;
+}
+
+#contact .contact-card:hover i {
+    transform: scale(1.15);
+}
+
+/* Titles */
+#contact .contact-card h4 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 10px;
+}
+
+/* Text */
+#contact .contact-card p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+/* Links */
+#contact .contact-card a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+#contact .contact-card a:hover {
+    color: #d99f00;
+}
+
+/* Contact Button */
+#contact .btn {
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    border: 2px solid #ffc107;
+    transition: all 0.3s ease;
+}
+
+#contact .btn:hover {
+    background: #111;
+    color: #ffc107;
+    border-color: #111;
+    transform: translateY(-2px);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    #contact {
+        padding: 60px 0;
+    }
+
+    #contact h2 {
+        font-size: 30px;
+    }
+
+    #contact > .container > p {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    #contact .contact-card {
+        padding: 25px 20px;
+    }
+
+    #contact .contact-card i {
+        font-size: 26px;
+    }
+}
+
+
+
 /* Our Brands & Popular Products Headings */
 
 .brands-section h2,
@@ -796,4 +1283,583 @@ html {
 
 .product-card .btn:hover {
     transform: translateY(-2px);
+}
+
+
+/* =========================================
+   PREMIUM PRODUCTS PAGE
+========================================= */
+
+/* Products Page Background */
+.products-section {
+    background:
+        radial-gradient(circle at 10% 20%, rgba(255, 193, 7, 0.08), transparent 25%),
+        radial-gradient(circle at 90% 80%, rgba(255, 193, 7, 0.06), transparent 25%),
+        #f1f1f1;
+
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle automotive pattern */
+.products-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0.025) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(0, 0, 0, 0.025) 50%,
+            rgba(0, 0, 0, 0.025) 75%,
+            transparent 75%
+        );
+
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+.products-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================================
+   PRODUCTS PAGE TITLE
+========================================= */
+
+.products-section > .container > h1 {
+    font-size: 42px;
+    font-weight: 900;
+    color: #111;
+    letter-spacing: -1px;
+
+    animation: productsTitle 0.8s ease;
+}
+
+.products-section > .container > p {
+    color: #666;
+    font-size: 16px;
+
+    animation: productsTitle 1s ease;
+}
+
+@keyframes productsTitle {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   BRAND BUTTONS
+========================================= */
+
+.products-section .brand-card {
+    display: block;
+
+    padding: 20px 15px;
+
+    background: #111;
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    border-radius: 10px;
+
+    border: 2px solid #111;
+
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.35s ease,
+        color 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* Yellow sliding background */
+.products-section .brand-card::before {
+    content: "";
+
+    position: absolute;
+    left: -100%;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: #ffc107;
+
+    transition: left 0.35s ease;
+
+    z-index: 0;
+}
+
+.products-section .brand-card {
+    z-index: 1;
+}
+
+.products-section .brand-card:hover::before {
+    left: 0;
+}
+
+.products-section .brand-card:hover {
+    color: #111;
+
+    transform: translateY(-6px);
+
+    border-color: #ffc107;
+
+    box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.18),
+        0 0 18px rgba(255, 193, 7, 0.18);
+}
+
+
+/* =========================================
+   BRAND HEADINGS
+========================================= */
+
+.products-section h2[id] {
+    color: #111;
+
+    font-size: 30px;
+    font-weight: 800;
+
+    margin-top: 60px !important;
+    margin-bottom: 30px !important;
+
+    padding-left: 18px;
+
+    border-left: 5px solid #ffc107;
+
+    position: relative;
+
+    transition: all 0.3s ease;
+}
+
+.products-section h2[id]:hover {
+    padding-left: 28px;
+    color: #d99f00;
+}
+
+
+/* =========================================
+   PRODUCT CARD
+========================================= */
+
+.products-section .product-card {
+    background: #ffffff;
+
+    padding: 22px;
+
+    border-radius: 14px;
+
+    border: 1px solid #e2e2e2;
+
+    height: 100%;
+
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+}
+
+/* Animated yellow corner */
+.products-section .product-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 0;
+    height: 0;
+
+    border-top: 55px solid #ffc107;
+    border-left: 55px solid transparent;
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease;
+}
+
+.products-section .product-card:hover::before {
+    opacity: 1;
+}
+
+.products-section .product-card:hover {
+    transform: translateY(-12px);
+
+    border-color: #ffc107;
+
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.15),
+        0 0 20px rgba(255, 193, 7, 0.12);
+}
+
+
+/* =========================================
+   PRODUCT IMAGE
+========================================= */
+
+.products-section .product-image {
+    height: 230px;
+
+    object-fit: contain;
+
+    transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
+}
+
+.products-section .product-card:hover .product-image {
+    transform: scale(1.1) rotate(-2deg);
+}
+
+
+/* =========================================
+   BRAND LABEL
+========================================= */
+
+.products-section .product-brand {
+    background: #111;
+
+    color: #ffc107;
+
+    padding: 5px 12px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    display: inline-block;
+
+    transition: all 0.3s ease;
+}
+
+.products-section .product-card:hover .product-brand {
+    background: #ffc107;
+    color: #111;
+}
+
+
+/* =========================================
+   PRODUCT TEXT
+========================================= */
+
+.products-section .product-card h4 {
+    color: #111;
+
+    font-size: 19px;
+    font-weight: 750;
+
+    transition: color 0.3s ease;
+}
+
+.products-section .product-card:hover h4 {
+    color: #d99f00;
+}
+
+.products-section .product-card p {
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+.products-section .product-card h5 {
+    color: #111;
+
+    font-size: 22px;
+    font-weight: 900;
+}
+
+
+/* =========================================
+   ADD TO CART BUTTON
+========================================= */
+
+.products-section .product-card .btn {
+    position: relative;
+
+    overflow: hidden;
+
+    background: #ffc107;
+
+    color: #111;
+
+    border: 2px solid #ffc107;
+
+    font-weight: 800;
+
+    transition: all 0.35s ease;
+}
+
+/* Button shine */
+.products-section .product-card .btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: rgba(255, 255, 255, 0.35);
+
+    transform: skewX(-25deg);
+
+    transition: left 0.5s ease;
+}
+
+.products-section .product-card .btn:hover::before {
+    left: 140%;
+}
+
+.products-section .product-card .btn:hover {
+    background: #111;
+
+    color: #ffc107;
+
+    border-color: #111;
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .products-section {
+        padding: 60px 0;
+    }
+
+    .products-section > .container > h1 {
+        font-size: 32px;
+    }
+
+    .products-section > .container > p {
+        font-size: 14px;
+    }
+
+    .products-section h2[id] {
+        font-size: 24px;
+    }
+
+    .products-section .product-image {
+        height: 200px;
+    }
+
+    .products-section .brand-card {
+        padding: 16px 10px;
+        font-size: 15px;
+    }
+}
+
+
+/* =========================================
+   PREMIUM FOOTER
+========================================= */
+
+footer {
+    background: #0d0d0d;
+    color: #ffffff;
+    padding: 55px 0 20px;
+    position: relative;
+    overflow: hidden;
+    border-top: 3px solid #ffc107;
+}
+
+/* Background glow */
+footer::before {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border: 1px solid rgba(255, 193, 7, 0.08);
+    border-radius: 50%;
+    top: -220px;
+    right: -100px;
+}
+
+footer::after {
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border: 1px solid rgba(255, 193, 7, 0.06);
+    border-radius: 50%;
+    bottom: -180px;
+    left: -80px;
+}
+
+footer .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Footer headings */
+footer h4 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Yellow heading underline */
+footer h4::after {
+    content: "";
+    display: block;
+    width: 35px;
+    height: 3px;
+    background: #ffc107;
+    margin-top: 8px;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+footer h4:hover::after {
+    width: 60px;
+}
+
+/* Footer text */
+footer p {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* Footer links */
+footer a {
+    color: #999;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffc107;
+    padding-left: 6px;
+}
+
+/* Footer list */
+footer ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+footer ul li {
+    margin-bottom: 10px;
+}
+
+/* Social icons */
+footer .social-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+footer .social-icons a {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #1c1c1c;
+    color: #ffffff;
+
+    border: 1px solid #333;
+    border-radius: 50%;
+
+    transition: all 0.35s ease;
+}
+
+footer .social-icons a:hover {
+    background: #ffc107;
+    color: #111;
+    border-color: #ffc107;
+    transform: translateY(-5px) rotate(5deg);
+    padding-left: 0;
+}
+
+/* Footer bottom */
+footer .footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #292929;
+    text-align: center;
+}
+
+footer .footer-bottom p {
+    margin: 0;
+    font-size: 13px;
+    color: #777;
+}
+
+footer .footer-bottom span {
+    color: #ffc107;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    footer {
+        padding: 45px 0 20px;
+    }
+
+    footer h4 {
+        font-size: 18px;
+    }
+
+    footer p,
+    footer a {
+        font-size: 13px;
+    }
+
+    footer .footer-bottom {
+        margin-top: 25px;
+    }
 }
