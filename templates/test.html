@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test Product API</title>
+</head>
+
+<body>
+
+    <h2>Test Product API</h2>
+
+    <button onclick="deleteProduct()">
+        Delete Product
+    </button>
+
+    <script>
+
+        async function deleteProduct() {
+
+            const productId = 23;
+
+            const response = await fetch(
+                `/api/products/${productId}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+            const result = await response.json();
+
+            console.log(result);
+
+            alert(JSON.stringify(result));
+
+        }
+
+    </script>
+
+</body>
+
+</html>

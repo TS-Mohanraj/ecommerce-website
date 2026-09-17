@@ -6,146 +6,234 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Sun Auto Centre | Two-Wheeler Accessories</title>
 
-<title>Sun Auto Centre | Two-Wheeler Accessories</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/css/style.css">
 
-<!-- Custom CSS -->
-<link rel="stylesheet" href="../static/css/style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
 
-<!-- Navbar -->
+<!-- ================= NAVBAR ================= -->
+
 <header>
+
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+
         <div class="container">
 
+            <!-- Logo -->
             <a class="navbar-brand" href="#">
+
                 <img 
-                  src="../static/img/logo.png"
-                  alt="Sun Auto Centre Logo"
-                  class="logo"
+                    src="../static/img/logo.png"
+                    alt="Sun Auto Centre Logo"
+                    class="logo"
                 >
-              
+
             </a>
 
-            <button class="navbar-toggler" type="button"
+
+            <!-- Mobile Menu Button -->
+
+            <button 
+                class="navbar-toggler"
+                type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
                 <span class="navbar-toggler-icon"></span>
+
             </button>
+
+
+            <!-- Navigation Links -->
 
             <div class="collapse navbar-collapse" id="navbarNav">
 
                 <ul class="navbar-nav ms-auto">
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
+
+                    <!-- Home -->
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#brands">Brands</a>
-                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#products">Products</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link cart-link" href="cart.html">
-                        🛒 Cart (<span id="cart-count">0</span>)
+                        <a class="nav-link" href="#">
+                            Home
                         </a>
+
                     </li>
+
+
+                    <!-- Brands -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="#brands">
+                            Brands
+                        </a>
+
+                    </li>
+
+
+                    <!-- Products -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="#products">
+                            Products
+                        </a>
+
+                    </li>
+
+
+                    <!-- Contact -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="#contact">
+                            Contact
+                        </a>
+
+                    </li>
+
+
+                    <!-- Cart -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link cart-link" href="cart.html">
+
+                            🛒 Cart
+                            (<span id="cart-count">0</span>)
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- OWNER LOGIN -->
+
+                    <li class="nav-item ms-2">
+
+                        <a 
+                            class="btn btn-warning"
+                            href="/owner-login">
+
+                            Owner Login
+
+                        </a>
+
+                    </li>
+
 
                 </ul>
 
             </div>
 
         </div>
+
     </nav>
+
 </header>
 
 
-<!-- Hero Section -->
 <!-- ================= HERO CAROUSEL ================= -->
 
-<!-- Hero Section -->
-<!-- ================= HERO CAROUSEL ================= -->
+<div 
+    id="homeCarousel"
+    class="carousel slide"
+    data-bs-ride="carousel"
+    data-bs-interval="3000">
 
-<div id="homeCarousel"
-     class="carousel slide"
-     data-bs-ride="carousel"
-     data-bs-interval="3000">
 
-    <!-- Indicators -->
+    <!-- Carousel Indicators -->
+
     <div class="carousel-indicators">
 
-        <button type="button"
-                data-bs-target="#homeCarousel"
-                data-bs-slide-to="0"
-                class="active">
+        <button
+            type="button"
+            data-bs-target="#homeCarousel"
+            data-bs-slide-to="0"
+            class="active">
         </button>
 
-        <button type="button"
-                data-bs-target="#homeCarousel"
-                data-bs-slide-to="1">
+        <button
+            type="button"
+            data-bs-target="#homeCarousel"
+            data-bs-slide-to="1">
         </button>
 
-        <button type="button"
-                data-bs-target="#homeCarousel"
-                data-bs-slide-to="2">
+        <button
+            type="button"
+            data-bs-target="#homeCarousel"
+            data-bs-slide-to="2">
         </button>
 
     </div>
 
 
     <!-- Carousel Images -->
+
     <div class="carousel-inner">
 
+
         <!-- Slide 1 -->
+
         <div class="carousel-item active">
-            <img src="../static/img/carousal1.png"
-                 class="d-block w-100 carousel-img"
-                 alt="Sun Auto Centre">
+
+            <img
+                src="../static/img/carousal1.png"
+                class="d-block w-100 carousel-img"
+                alt="Sun Auto Centre">
+
         </div>
 
 
         <!-- Slide 2 -->
+
         <div class="carousel-item">
-            <img src="../static/img/carousal2.png"
-                 class="d-block w-100 carousel-img"
-                 alt="Bike Accessories">
+
+            <img
+                src="../static/img/carousal2.png"
+                class="d-block w-100 carousel-img"
+                alt="Bike Accessories">
+
         </div>
 
 
         <!-- Slide 3 -->
+
         <div class="carousel-item">
-            <img src="../static/img/carousal3.png"
-                 class="d-block w-100 carousel-img"
-                 alt="Bike Products">
+
+            <img
+                src="../static/img/carousal3.png"
+                class="d-block w-100 carousel-img"
+                alt="Bike Products">
+
         </div>
 
     </div>
 
 
     <!-- Previous Button -->
-    <button class="carousel-control-prev"
-            type="button"
-            data-bs-target="#homeCarousel"
-            data-bs-slide="prev">
+
+    <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#homeCarousel"
+        data-bs-slide="prev">
 
         <span class="carousel-control-prev-icon"></span>
 
@@ -153,10 +241,12 @@
 
 
     <!-- Next Button -->
-    <button class="carousel-control-next"
-            type="button"
-            data-bs-target="#homeCarousel"
-            data-bs-slide="next">
+
+    <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#homeCarousel"
+        data-bs-slide="next">
 
         <span class="carousel-control-next-icon"></span>
 
@@ -165,45 +255,77 @@
 </div>
 
 
-<!-- Brands Section -->
-
-    <!-- Carousel -->
-
-<!-- YOUR CAROUSEL CODE HERE -->
-
-
-<!-- Brands Section -->
+<!-- ================= BRANDS SECTION ================= -->
 
 <section id="brands" class="brands-section">
 
     <div class="container">
 
-        <h2 class="text-center mb-4">Our Brands</h2>
+        <h2 class="text-center mb-4">
+            Our Brands
+        </h2>
+
 
         <div class="row text-center">
 
+
+            <!-- Castrol -->
+
             <div class="col-md-3 col-6 mb-3">
-                <a href="products.html#castrol-products" class="brand-card">
+
+                <a
+                    href="products.html#castrol-products"
+                    class="brand-card">
+
                     CASTROL
+
                 </a>
+
             </div>
 
+
+            <!-- Motul -->
+
             <div class="col-md-3 col-6 mb-3">
-                <a href="products.html#motul-products" class="brand-card">
+
+                <a
+                    href="products.html#motul-products"
+                    class="brand-card">
+
                     MOTUL
+
                 </a>
+
             </div>
 
+
+            <!-- Hero -->
+
             <div class="col-md-3 col-6 mb-3">
-                <a href="products.html#hero-products" class="brand-card">
+
+                <a
+                    href="products.html#hero-products"
+                    class="brand-card">
+
                     HERO
+
                 </a>
+
             </div>
 
+
+            <!-- TVS -->
+
             <div class="col-md-3 col-6 mb-3">
-                <a href="products.html#tvs-products" class="brand-card">
+
+                <a
+                    href="products.html#tvs-products"
+                    class="brand-card">
+
                     TVS
+
                 </a>
+
             </div>
 
         </div>
@@ -213,343 +335,574 @@
 </section>
 
 
-    <!-- Previous -->
-    <button class="carousel-control-prev"
-            type="button"
-            data-bs-target="#homeCarousel"
-            data-bs-slide="prev">
+<!-- ================= PRODUCTS SECTION ================= -->
 
-        <span class="carousel-control-prev-icon"></span>
-    </button>
+<section id="products" class="products-section">
 
+    <div class="container">
 
-    <!-- Next -->
-    <button class="carousel-control-next"
-            type="button"
-            data-bs-target="#homeCarousel"
-            data-bs-slide="next">
-
-        <span class="carousel-control-next-icon"></span>
-    </button>
-
-</div>
-    <!-- Products Section -->
-    <section id="products" class="products-section">
-
-        <div class="container">
-
-            <h2 class="text-center mb-5">Popular Products</h2>
-
-            <div class="row">
-
-        <div id="castrol-product" class="col-md-4 mb-4">
-
-        <div class="product-card">
-
-           <img 
-            src="../static/img/castrol engine oil.jpg"
-            alt="Castrol Engine Oil"
-            class="product-image"
-             >
-
-                <span class="product-brand">CASTROL</span>
-
-                    <h4>Castrol Engine Oil</h4>
-
-                   <p>High-quality engine oil for better engine performance.</p>
-
-                        <h5>₹650</h5>
-
-                 <button class="btn btn-warning add-cart">
-                         Add to Cart
-                            </button>
-         </div>
-
-         </div>
-
-                <!-- Chain Cleaner -->
-<div id="motul-product" class="col-md-4 mb-4">
-    <div class="product-card">
-
-        <img 
-            src="../static/img/moto chain cleanser.jpg"
-            alt="Motul Chain Cleaner"
-            class="product-image"
-        >
-
-        <span class="product-brand">MOTUL</span>
-
-        <h4>Motul C1 Chain Clean</h4>
-
-        <p>
-            Powerful cleaner that removes dirt and grease from motorcycle chains.
-        </p>
-
-        <h5>₹399</h5>
-
-        <button class="btn btn-warning add-cart">
-            Add to Cart
-        </button>
-
-    </div>
-</div>
+        <h2 class="text-center mb-5">
+            Popular Products
+        </h2>
 
 
-<!-- Chain Lubricant -->
-<div id="motul-chain-lubricant" class="col-md-4 mb-4">
-    <div class="product-card">
-
-        <img 
-            src="../static/img/chain lubricant.jpg"
-            alt="Motul Chain Lubricant"
-            class="product-image"
-        >
-
-        <span class="product-brand">MOTUL</span>
-
-        <h4>Motul C2 Chain Lube</h4>
-
-        <p>
-            Long-lasting lubricant for smooth and reliable chain performance.
-        </p>
-
-        <h5>₹449</h5>
-
-        <button class="btn btn-warning add-cart">
-            Add to Cart
-        </button>
-
-    </div>
-</div>
+        <div class="row">
 
 
-<!-- Mobile Holder -->
- <div id="mobile-holder-product" class="col-md-4 mb-4">
-    <div class="product-card">
+            <!-- Castrol Engine Oil -->
 
-        <img 
-            src="../static/img/mobile holder.jpg"
-            alt="Motorcycle Mobile Holder"
-            class="product-image"
-        >
+            <div
+                id="castrol-product"
+                class="col-md-4 mb-4">
 
-        <span class="product-brand">ACCESSORIES</span>
-
-        <h4>Motorcycle Mobile Holder</h4>
-
-        <p>
-            Strong and secure mobile holder for safe motorcycle navigation.
-        </p>
-
-        <h5>₹799</h5>
-
-        <button class="btn btn-warning add-cart">
-            Add to Cart
-        </button>
-
-    </div>
-</div>
+                <div class="product-card">
 
 
-<!-- Engine Guard -->
-<div id="hero-product" class="col-md-4 mb-4">
-    <div class="product-card">
-
-        <img 
-            src="../static/img/engine-guard.jpg"
-            alt="Motorcycle Engine Guard"
-            class="product-image"
-        >
-
-        <span class="product-brand">HERO / TVS</span>
-
-        <h4>Motorcycle Engine Guard</h4>
-
-        <p>
-            Strong protective guard designed to protect the engine during impacts.
-        </p>
-
-        <h5>₹2,499</h5>
-
-        <button class="btn btn-warning add-cart">
-            Add to Cart
-        </button>
-
-    </div>
-</div>
+                    <img
+                        src="../static/img/castrol engine oil.jpg"
+                        alt="Castrol Engine Oil"
+                        class="product-image"
+                    >
 
 
-<!-- Visor -->
-<div id="tvs-product" class="col-md-4 mb-4">
-    <div class="product-card">
+                    <span class="product-brand">
+                        CASTROL
+                    </span>
 
-        <img 
-            src="../static/img/visor.jpg"
-            alt="Motorcycle Visor"
-            class="product-image"
-        >
 
-        <span class="product-brand">HERO / TVS</span>
+                    <h4>
+                        Castrol Engine Oil
+                    </h4>
 
-        <h4>Motorcycle Dark Visor</h4>
 
-        <p>
-            Stylish and durable visor designed for better wind protection.
-        </p>
+                    <p>
+                        High-quality engine oil for better engine performance.
+                    </p>
 
-        <h5>₹1,099</h5>
 
-        <button class="btn btn-warning add-cart">
-            Add to Cart
-        </button>
+                    <h5>
+                        ₹650
+                    </h5>
 
-    </div>
-</div>
+
+                    <button
+                        class="btn btn-warning add-cart">
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
 
             </div>
-            <!-- View All Products Button -->
+
+
+            <!-- Motul Chain Cleaner -->
+
+            <div
+                id="motul-product"
+                class="col-md-4 mb-4">
+
+                <div class="product-card">
+
+
+                    <img
+                        src="../static/img/moto chain cleanser.jpg"
+                        alt="Motul Chain Cleaner"
+                        class="product-image"
+                    >
+
+
+                    <span class="product-brand">
+                        MOTUL
+                    </span>
+
+
+                    <h4>
+                        Motul C1 Chain Clean
+                    </h4>
+
+
+                    <p>
+                        Powerful cleaner that removes dirt and grease from motorcycle chains.
+                    </p>
+
+
+                    <h5>
+                        ₹399
+                    </h5>
+
+
+                    <button
+                        class="btn btn-warning add-cart">
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Motul Chain Lubricant -->
+
+            <div
+                id="motul-chain-lubricant"
+                class="col-md-4 mb-4">
+
+                <div class="product-card">
+
+
+                    <img
+                        src="../static/img/chain lubricant.jpg"
+                        alt="Motul Chain Lubricant"
+                        class="product-image"
+                    >
+
+
+                    <span class="product-brand">
+                        MOTUL
+                    </span>
+
+
+                    <h4>
+                        Motul C2 Chain Lube
+                    </h4>
+
+
+                    <p>
+                        Long-lasting lubricant for smooth and reliable chain performance.
+                    </p>
+
+
+                    <h5>
+                        ₹449
+                    </h5>
+
+
+                    <button
+                        class="btn btn-warning add-cart">
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Mobile Holder -->
+
+            <div
+                id="mobile-holder-product"
+                class="col-md-4 mb-4">
+
+                <div class="product-card">
+
+
+                    <img
+                        src="../static/img/mobile holder.jpg"
+                        alt="Motorcycle Mobile Holder"
+                        class="product-image"
+                    >
+
+
+                    <span class="product-brand">
+                        ACCESSORIES
+                    </span>
+
+
+                    <h4>
+                        Motorcycle Mobile Holder
+                    </h4>
+
+
+                    <p>
+                        Strong and secure mobile holder for safe motorcycle navigation.
+                    </p>
+
+
+                    <h5>
+                        ₹799
+                    </h5>
+
+
+                    <button
+                        class="btn btn-warning add-cart">
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Engine Guard -->
+
+            <div
+                id="hero-product"
+                class="col-md-4 mb-4">
+
+                <div class="product-card">
+
+
+                    <img
+                        src="../static/img/engine-guard.jpg"
+                        alt="Motorcycle Engine Guard"
+                        class="product-image"
+                    >
+
+
+                    <span class="product-brand">
+                        HERO / TVS
+                    </span>
+
+
+                    <h4>
+                        Motorcycle Engine Guard
+                    </h4>
+
+
+                    <p>
+                        Strong protective guard designed to protect the engine during impacts.
+                    </p>
+
+
+                    <h5>
+                        ₹2,499
+                    </h5>
+
+
+                    <button
+                        class="btn btn-warning add-cart">
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Visor -->
+
+            <div
+                id="tvs-product"
+                class="col-md-4 mb-4">
+
+                <div class="product-card">
+
+
+                    <img
+                        src="../static/img/visor.jpg"
+                        alt="Motorcycle Visor"
+                        class="product-image"
+                    >
+
+
+                    <span class="product-brand">
+                        HERO / TVS
+                    </span>
+
+
+                    <h4>
+                        Motorcycle Dark Visor
+                    </h4>
+
+
+                    <p>
+                        Stylish and durable visor designed for better wind protection.
+                    </p>
+
+
+                    <h5>
+                        ₹1,099
+                    </h5>
+
+
+                    <button
+                        class="btn btn-warning add-cart">
+
+                        Add to Cart
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- View All Products Button -->
+
         <div class="text-center mt-4">
-             <a href="products.html" class="btn btn-warning btn-lg">
+
+            <a
+                href="products.html"
+                class="btn btn-warning btn-lg">
+
                 View All Products
-             </a>
-        </div>
+
+            </a>
 
         </div>
 
-    </section>
-    <!-- Why Choose MotoGear -->
+    </div>
+
+</section>
+
+
+<!-- ================= WHY CHOOSE US ================= -->
+
 <section class="why-section">
 
     <div class="container">
 
-        <h2 class="text-center mb-5">Why Choose Sun Auto Centre?</h2>
+        <h2 class="text-center mb-5">
+            Why Choose Sun Auto Centre?
+        </h2>
+
 
         <div class="row text-center">
 
+
+            <!-- Genuine Products -->
+
             <div class="col-md-3 col-6 mb-4">
+
                 <div class="why-card">
+
                     <h1>✓</h1>
-                    <h4>Genuine Products</h4>
-                    <p>Quality products from trusted brands.</p>
-                </div>
-            </div>
 
-            <div class="col-md-3 col-6 mb-4">
-                <div class="why-card">
-                    <h1>⭐</h1>
-                    <h4>Trusted Brands</h4>
-                    <p>Products from leading motorcycle brands.</p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-6 mb-4">
-                <div class="why-card">
-                    <h1>🛡️</h1>
-                    <h4>Quality Assured</h4>
-                    <p>Reliable products for your motorcycle.</p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-6 mb-4">
-                <div class="why-card">
-                    <h1>💬</h1>
-                    <h4>Easy Ordering</h4>
-                    <p>Simple ordering through our website.</p>
-                </div>
-            </div>
-
-        </div>
-        
-
-    </div>
-        
-
-</section>
-     
-    <!-- Contact Section -->
-<section id="contact" class="contact-section">
-
-    <div class="container">
-
-        <h2 class="text-center mb-5">Contact Sun Auto Centre</h2>
-
-        <div class="row text-center">
-
-            <!-- Location -->
-            <div class="col-md-4 mb-4">
-                <div class="contact-card">
-
-                    <h1>📍</h1>
-                    <h4>Our Location</h4>
+                    <h4>
+                        Genuine Products
+                    </h4>
 
                     <p>
-                        No. 18, Vandayar Building,<br>
-                        Gandhiji Road, Karanthai,<br>
-                        Thanjavur - 2
+                        Quality products from trusted brands.
                     </p>
 
                 </div>
+
+            </div>
+
+
+            <!-- Trusted Brands -->
+
+            <div class="col-md-3 col-6 mb-4">
+
+                <div class="why-card">
+
+                    <h1>⭐</h1>
+
+                    <h4>
+                        Trusted Brands
+                    </h4>
+
+                    <p>
+                        Products from leading motorcycle brands.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Quality Assured -->
+
+            <div class="col-md-3 col-6 mb-4">
+
+                <div class="why-card">
+
+                    <h1>🛡️</h1>
+
+                    <h4>
+                        Quality Assured
+                    </h4>
+
+                    <p>
+                        Reliable products for your motorcycle.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Easy Ordering -->
+
+            <div class="col-md-3 col-6 mb-4">
+
+                <div class="why-card">
+
+                    <h1>💬</h1>
+
+                    <h4>
+                        Easy Ordering
+                    </h4>
+
+                    <p>
+                        Simple ordering through our website.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT SECTION ================= -->
+
+<section
+    id="contact"
+    class="contact-section">
+
+    <div class="container">
+
+
+        <h2 class="text-center mb-5">
+            Contact Sun Auto Centre
+        </h2>
+
+
+        <div class="row text-center">
+
+
+            <!-- Location -->
+
+            <div class="col-md-4 mb-4">
+
+                <div class="contact-card">
+
+                    <h1>📍</h1>
+
+                    <h4>
+                        Our Location
+                    </h4>
+
+
+                    <p>
+
+                        No. 18, Vandayar Building,<br>
+                        Gandhiji Road, Karanthai,<br>
+                        Thanjavur - 2
+
+                    </p>
+
+                </div>
+
             </div>
 
 
             <!-- Phone -->
+
             <div class="col-md-4 mb-4">
+
                 <div class="contact-card">
 
                     <h1>📞</h1>
-                    <h4>Call Us</h4>
 
-                    <p>+91 99765 59984</p>
+                    <h4>
+                        Call Us
+                    </h4>
 
-                    <a href="tel:+919976559984"
-                       class="btn btn-warning">
+
+                    <p>
+                        +91 99765 59984
+                    </p>
+
+
+                    <a
+                        href="tel:+919976559984"
+                        class="btn btn-warning">
+
                         Call Now
+
                     </a>
 
                 </div>
+
             </div>
 
 
             <!-- WhatsApp -->
+
             <div class="col-md-4 mb-4">
+
                 <div class="contact-card">
 
                     <h1>💬</h1>
-                    <h4>WhatsApp Us</h4>
 
-                    <p>+91 99765 59984</p>
+                    <h4>
+                        WhatsApp Us
+                    </h4>
 
-                    <a href="https://wa.me/919976559984"
-                       class="btn btn-success"
-                       target="_blank">
+
+                    <p>
+                        +91 99765 59984
+                    </p>
+
+
+                    <a
+                        href="https://wa.me/919976559984"
+                        class="btn btn-success"
+                        target="_blank">
+
                         Chat on WhatsApp
+
                     </a>
 
                 </div>
+
             </div>
 
         </div>
 
 
         <!-- Opening Hours -->
+
         <div class="row justify-content-center mt-4">
 
             <div class="col-md-6 text-center">
 
                 <div class="contact-card">
 
-                    <h1>🕒</h1>
+                    <h1>
+                        🕒
+                    </h1>
 
-                    <h4>Opening Hours</h4>
+
+                    <h4>
+                        Opening Hours
+                    </h4>
+
 
                     <p>
+
                         Monday - Saturday<br>
                         9:00 AM - 9:00 PM
+
                     </p>
 
+
                     <p>
+
                         Sunday<br>
                         Contact for availability
+
                     </p>
 
                 </div>
@@ -562,29 +915,38 @@
 
 </section>
 
-</main>
 
+<!-- ================= FOOTER ================= -->
 
-<!-- Footer -->
 <footer>
 
     <div class="container text-center">
-         <h4>SUN AUTO CENTRE</h4>
+
+        <h4>
+            SUN AUTO CENTRE
+        </h4>
+
 
         <p>
-           Two-Wheeler Accessories, Lubricants & Genuine Products
+            Two-Wheeler Accessories, Lubricants & Genuine Products
         </p>
 
-             <p>
-              © 2026 Sun Auto Centre. All Rights Reserved.
-             </p>
+
+        <p>
+            © 2026 Sun Auto Centre. All Rights Reserved.
+        </p>
+
     </div>
 
 </footer>
 
 
-<!-- Bootstrap JavaScript -->
+<!-- ================= BOOTSTRAP JS ================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JavaScript -->
+
 <script src="../static/js/script.js"></script>
 
 

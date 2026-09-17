@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Owner Dashboard | Sun Auto Centre</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+</head>
+
+
+<body>
+
+    <!-- ===============================
+         NAVBAR
+    =============================== -->
+
+    <nav class="navbar navbar-dark bg-dark">
+
+        <div class="container">
+
+            <span class="navbar-brand">
+                Sun Auto Centre - Owner Dashboard
+            </span>
+
+            <button
+                class="btn btn-danger"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ===============================
+         MAIN CONTENT
+    =============================== -->
+
+    <div class="container mt-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <h2>
+                Products
+            </h2>
+
+            <button
+                class="btn btn-warning"
+                onclick="showAddForm()">
+
+                + Add Product
+
+            </button>
+
+        </div>
+
+
+        <!-- ===============================
+             ADD PRODUCT FORM
+        =============================== -->
+
+        <div
+            id="productForm"
+            class="card shadow mb-4"
+            style="display: none;">
+
+            <div class="card-body">
+
+                <h4 id="formTitle">
+                    Add Product
+                </h4>
+
+
+                <form id="productFormElement">
+
+                    <input
+                        type="hidden"
+                        id="productId">
+
+
+                    <!-- Brand -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Brand
+                        </label>
+
+                        <input
+                            type="text"
+                            id="brand"
+                            class="form-control"
+                            placeholder="Example: CASTROL"
+                            required>
+
+                    </div>
+
+
+                    <!-- Product Name -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Product Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            class="form-control"
+                            placeholder="Example: Castrol Power1"
+                            required>
+
+                    </div>
+
+
+                    <!-- Description -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="description"
+                            class="form-control"
+                            rows="3"
+                            placeholder="Product description">
+                        </textarea>
+
+                    </div>
+
+
+                    <!-- Price -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Price
+                        </label>
+
+                        <input
+                            type="number"
+                            id="price"
+                            class="form-control"
+                            placeholder="Example: 650">
+
+                    </div>
+
+
+                    <!-- Image -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Image File Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="image"
+                            class="form-control"
+                            placeholder="Example: castrol.jpg">
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+
+                        Save Product
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        onclick="hideForm()">
+
+                        Cancel
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- ===============================
+             PRODUCTS TABLE
+        =============================== -->
+
+        <div class="card shadow">
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-hover">
+
+                        <thead class="table-dark">
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>Image</th>
+
+                                <th>Brand</th>
+
+                                <th>Name</th>
+
+                                <th>Price</th>
+
+                                <th>Actions</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="productsTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="text-center">
+
+                                    Loading products...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===============================
+         JAVASCRIPT
+    =============================== -->
+
+    <script>
+
+        // =================================
+        // LOAD PRODUCTS
+        // =================================
+
+        async function loadProducts() {
+
+            try {
+
+                const response =
+                    await fetch("/api/products");
+
+                const products =
+                    await response.json();
+
+
+                const table =
+                    document.getElementById(
+                        "productsTable"
+                    );
+
+
+                table.innerHTML = "";
+
+
+                if (products.length === 0) {
+
+                    table.innerHTML = `
+                        <tr>
+                            <td colspan="6"
+                                class="text-center">
+                                No products found
+                            </td>
+                        </tr>
+                    `;
+
+                    return;
+                }
+
+
+                products.forEach(function(product) {
+
+                    const row = document.createElement("tr");
+
+
+                    row.innerHTML = `
+
+                        <td>
+                            ${product.id}
+                        </td>
+
+                        <td>
+
+                            ${
+                                product.image
+                                ?
+                                `<img
+                                    src="/static/img/${product.image}"
+                                    width="60"
+                                    height="60"
+                                    style="object-fit: cover;">
+                                `
+                                :
+                                "No Image"
+                            }
+
+                        </td>
+
+                        <td>
+                            ${product.brand}
+                        </td>
+
+                        <td>
+                            ${product.name}
+                        </td>
+
+                        <td>
+
+                            ${
+                                product.price !== null
+                                ?
+                                "₹" +
+                                Number(product.price)
+                                    .toLocaleString("en-IN")
+                                :
+                                "Contact for Price"
+                            }
+
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="btn btn-primary btn-sm"
+                                onclick="editProduct(${product.id})">
+
+                                Edit
+
+                            </button>
+
+
+                            <button
+                                class="btn btn-danger btn-sm"
+                                onclick="deleteProduct(${product.id})">
+
+                                Delete
+
+                            </button>
+
+                        </td>
+
+                    `;
+
+
+                    table.appendChild(row);
+
+                });
+
+
+            } catch (error) {
+
+                console.error(
+                    "Error loading products:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        // =================================
+        // SHOW ADD FORM
+        // =================================
+
+        function showAddForm() {
+
+            document.getElementById(
+                "productForm"
+            ).style.display = "block";
+
+
+            document.getElementById(
+                "formTitle"
+            ).textContent = "Add Product";
+
+
+            document.getElementById(
+                "productFormElement"
+            ).reset();
+
+
+            document.getElementById(
+                "productId"
+            ).value = "";
+
+        }
+
+
+        // =================================
+        // HIDE FORM
+        // =================================
+
+        function hideForm() {
+
+            document.getElementById(
+                "productForm"
+            ).style.display = "none";
+
+        }
+
+
+        // =================================
+        // EDIT PRODUCT
+        // =================================
+
+        async function editProduct(id) {
+
+            try {
+
+                const response =
+                    await fetch("/api/products");
+
+                const products =
+                    await response.json();
+
+
+                const product =
+                    products.find(function(item) {
+
+                        return item.id === id;
+
+                    });
+
+
+                if (!product) {
+
+                    alert("Product not found");
+
+                    return;
+
+                }
+
+
+                document.getElementById(
+                    "productForm"
+                ).style.display = "block";
+
+
+                document.getElementById(
+                    "formTitle"
+                ).textContent =
+                    "Edit Product";
+
+
+                document.getElementById(
+                    "productId"
+                ).value = product.id;
+
+
+                document.getElementById(
+                    "brand"
+                ).value = product.brand;
+
+
+                document.getElementById(
+                    "name"
+                ).value = product.name;
+
+
+                document.getElementById(
+                    "description"
+                ).value =
+                    product.description || "";
+
+
+                document.getElementById(
+                    "price"
+                ).value =
+                    product.price ?? "";
+
+
+                document.getElementById(
+                    "image"
+                ).value =
+                    product.image || "";
+
+
+            } catch (error) {
+
+                console.error(error);
+
+            }
+
+        }
+
+
+        // =================================
+        // SAVE PRODUCT
+        // =================================
+
+        document
+            .getElementById("productFormElement")
+            .addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+
+                    const productId =
+                        document.getElementById(
+                            "productId"
+                        ).value;
+
+
+                    const product = {
+
+                        brand:
+                            document.getElementById(
+                                "brand"
+                            ).value,
+
+                        name:
+                            document.getElementById(
+                                "name"
+                            ).value,
+
+                        description:
+                            document.getElementById(
+                                "description"
+                            ).value,
+
+                        price:
+                            document.getElementById(
+                                "price"
+                            ).value
+                            ?
+                            Number(
+                                document.getElementById(
+                                    "price"
+                                ).value
+                            )
+                            :
+                            null,
+
+                        image:
+                            document.getElementById(
+                                "image"
+                            ).value
+
+                    };
+
+
+                    try {
+
+                        let response;
+
+
+                        // EDIT
+
+                        if (productId) {
+
+                            response =
+                                await fetch(
+                                    `/api/products/${productId}`,
+                                    {
+                                        method: "PUT",
+
+                                        headers: {
+                                            "Content-Type":
+                                                "application/json"
+                                        },
+
+                                        body:
+                                            JSON.stringify(product)
+                                    }
+                                );
+
+                        }
+
+
+                        // ADD
+
+                        else {
+
+                            response =
+                                await fetch(
+                                    "/api/products",
+                                    {
+                                        method: "POST",
+
+                                        headers: {
+                                            "Content-Type":
+                                                "application/json"
+                                        },
+
+                                        body:
+                                            JSON.stringify(product)
+                                    }
+                                );
+
+                        }
+
+
+                        const result =
+                            await response.json();
+
+
+                        if (!response.ok) {
+
+                            alert(
+                                result.error ||
+                                "Something went wrong"
+                            );
+
+                            return;
+
+                        }
+
+
+                        alert(
+                            result.message
+                        );
+
+
+                        hideForm();
+
+                        loadProducts();
+
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        alert(
+                            "Unable to connect to server"
+                        );
+
+                    }
+
+                }
+            );
+
+
+        // =================================
+        // DELETE PRODUCT
+        // =================================
+
+        async function deleteProduct(id) {
+
+            const confirmDelete =
+                confirm(
+                    "Are you sure you want to delete this product?"
+                );
+
+
+            if (!confirmDelete) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `/api/products/${id}`,
+                        {
+                            method: "DELETE"
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    alert(
+                        result.error ||
+                        "Failed to delete product"
+                    );
+
+                    return;
+
+                }
+
+
+                alert(
+                    result.message
+                );
+
+
+                loadProducts();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Unable to connect to server"
+                );
+
+            }
+
+        }
+
+
+        // =================================
+        // LOGOUT
+        // =================================
+
+        function logout() {
+
+            window.location.href =
+                "/owner-login";
+
+        }
+
+
+        // =================================
+        // INITIAL LOAD
+        // =================================
+
+        loadProducts();
+
+    </script>
+
+</body>
+
+</html>
