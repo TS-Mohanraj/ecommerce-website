@@ -813,3 +813,79 @@ function placeOrder() {
     displayCart();
 
 }
+
+
+console.log("CUSTOMER REGISTER SCRIPT LOADED");
+
+
+const registerForm = document.querySelector("#customerRegisterForm");
+
+if (registerForm) {
+
+    registerForm.addEventListener("submit", async function(e) {
+
+        e.preventDefault();
+
+        const name = document.querySelector("#name").value;
+        const phone = document.querySelector("#phone").value;
+        const password = document.querySelector("#password").value;
+        const address = document.querySelector("#address").value;
+
+        const response = await fetch("/api/customer/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                phone: phone,
+                password: password,
+                address: address
+            })
+        });
+
+        const result = await response.json();
+
+        alert(result.message);
+
+        if (response.ok) {
+            window.location.href = "/customer-login";
+        }
+
+    });
+
+}
+
+const loginForm = document.querySelector("#customerLoginForm");
+
+if (loginForm) {
+
+    loginForm.addEventListener("submit", async function(e) {
+
+        e.preventDefault();
+
+        const phone = document.querySelector("#phone").value;
+        const password = document.querySelector("#password").value;
+
+        const response = await fetch("/api/customer/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                phone: phone,
+                password: password
+            })
+        });
+
+        const result = await response.json();
+
+        alert(result.message);
+
+        if (response.ok) {
+            window.location.href = "/";
+        }
+
+    });
+
+}

@@ -32,6 +32,22 @@ db.prepare(`
 `).run();
 
 
+
+
+// ===============================
+// CUSTOMERS TABLE
+// ===============================
+
+db.prepare(`
+    CREATE TABLE IF NOT EXISTS customers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        phone TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        address TEXT
+    )
+`).run();
+
 console.log("Database connected successfully");
 
 module.exports = db;
