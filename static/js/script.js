@@ -180,6 +180,10 @@ function addToCart(button) {
     const productImage =
         productCard.querySelector(".product-image").src;
 
+    // Get product ID
+    const productId =
+        productCard.dataset.id;
+
 
     const existingProduct = cart.find(function(product) {
 
@@ -196,6 +200,8 @@ function addToCart(button) {
     } else {
 
         const product = {
+
+            id: productId,
 
             name: productName,
 
@@ -665,9 +671,11 @@ document.addEventListener(
 // ===============================
 // Place Order - WhatsApp
 // ===============================
-function placeOrder() {
+async function placeOrder() {
+{
 
-    if (cart.length === 0) {
+    if (cart.length === 0) 
+        {
 
         alert("Your cart is empty.");
 
@@ -796,6 +804,25 @@ function placeOrder() {
         "?text=" +
         message;
 
+   const orderResponse = await fetch("/api/orders", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        total: total,
+        items: cart
+    })
+    });
+
+    const orderResult = await orderResponse.json();
+
+    if (!orderResponse.ok) {
+    alert(orderResult.message);
+    return;
+   }
+
+   alert("Order saved successfully. Order ID: " + orderResult.order_id);
 
     window.open(
         whatsappURL,

@@ -1,12 +1,9 @@
-from flask import Flask, render_template, request,session
-
-app = Flask(__name__)
-app.secret_key = "sun_auto_centre_secret"
-
+from flask import Flask, render_template, request, session
 import sqlite3
-from flask import Flask, render_template
 
 app = Flask(__name__)
+
+app.secret_key = "sun_auto_centre_secret"
 
 DATABASE = "database/products.db"
 
@@ -84,12 +81,44 @@ def login_customer():
     conn.close()
 
     if customer:
-        return {
-            "message": "Login successful",
-            "customer": dict(customer)
-        }
+
+         session["customer_id"] = customer["id"]
+         session["customer_name"] = customer["name"]
+         session["customer_phone"] = customer["phone"]
+
+         print("SESSION SAVED:", dict(session))
+
+         return {
+              "message": "Login successful",
+              "customer": dict(customer)
+    }
 
     return {"message": "Invalid mobile number or password"}, 401
+
+@app.route("/api/customer/profile")
+def customer_profile():
+
+    customer_id = session.get("customer_id")
+
+    if not customer_id:
+        return {"message": "Please login first"}, 401
+
+    conn = sqlite3.connect("database/products.db")
+    conn.row_factory = sqlite3.Row
+
+    customer = conn.execute("""
+        SELECT id, name, phone, address
+        FROM customers
+        WHERE id = ?
+    """, (customer_id,)).fetchone()
+
+    conn.close()
+
+    if not customer:
+        return {"message": "Customer not found"}, 404
+
+    return dict(customer)
+
 
 @app.route("/customer-register")
 def customer_register():
@@ -122,6 +151,55 @@ def register_customer():
 
     finally:
         conn.close()
+
+
+@app.route("/api/orders", methods=["POST"])
+def create_order():
+
+    customer_id = session.get("customer_id")
+
+    if not customer_id:
+        return {"message": "Please login first"}, 401
+
+    data = request.get_json()
+
+    total = data["total"]
+    items = data["items"]
+
+    conn = sqlite3.connect(DATABASE)
+
+    cursor = conn.cursor()
+
+    # Create order
+    cursor.execute("""
+        INSERT INTO orders (customer_id, total)
+        VALUES (?, ?)
+    """, (customer_id, total))
+
+    order_id = cursor.lastrowid
+
+    # Add order items
+    for item in items:
+        cursor.execute("""
+            INSERT INTO order_items
+            (order_id, product_id, product_name, quantity, price)
+            VALUES (?, ?, ?, ?, ?)
+        """, (
+            order_id,
+            item["id"],
+            item["name"],
+            item["quantity"],
+            item["price"]
+        ))
+
+    conn.commit()
+    conn.close()
+
+    return {
+        "message": "Order placed successfully",
+        "order_id": order_id
+    }
+    
 
 
 # ===============================
