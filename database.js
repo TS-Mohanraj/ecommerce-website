@@ -78,6 +78,19 @@ db.prepare(`
 `).run();
 
 
+db.prepare(`
+    CREATE TABLE IF NOT EXISTS returns (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        order_id INTEGER NOT NULL,
+        customer_id INTEGER NOT NULL,
+        reason TEXT NOT NULL,
+        status TEXT DEFAULT 'Requested',
+        return_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (order_id) REFERENCES orders(id),
+        FOREIGN KEY (customer_id) REFERENCES customers(id)
+    )
+`).run();
+
 
 console.log("Database connected successfully");
 

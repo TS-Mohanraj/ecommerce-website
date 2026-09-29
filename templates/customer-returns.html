@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>My Returns | Sun Auto Centre</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+
+        <div class="container">
+
+            <a
+                class="navbar-brand"
+                href="/">
+
+                <img
+                    src="/static/img/logo.png"
+                    alt="Sun Auto Centre Logo"
+                    class="logo">
+
+            </a>
+
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <div
+                class="collapse navbar-collapse"
+                id="navbarNav">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="/">
+
+                            Home
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="/products">
+
+                            Products
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link cart-link"
+                            href="/cart">
+
+                            🛒 Cart
+                            (<span id="cart-count">0</span>)
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item ms-2">
+
+                        <a
+                            class="btn btn-warning"
+                            href="/customer-account">
+
+                            My Account
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ================= RETURNS ================= -->
+
+<section class="customer-account-section">
+
+    <div class="container">
+
+        <h2 class="text-center">
+            My Returns
+        </h2>
+
+
+        <div
+            id="returns-container"
+            class="row g-4">
+
+            <div class="col-12 text-center">
+
+                <p>
+                    Loading returns...
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+
+<script>
+
+async function loadReturns() {
+
+    try {
+
+        const response =
+            await fetch("/api/customer/returns");
+
+
+        const returns =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            window.location.href =
+                "/customer-login";
+
+            return;
+
+        }
+
+
+        const container =
+            document.getElementById(
+                "returns-container"
+            );
+
+
+        container.innerHTML = "";
+
+
+        /* =========================
+           NO RETURNS
+        ========================= */
+
+        if (returns.length === 0) {
+
+            container.innerHTML = `
+
+                <div class="col-12 text-center">
+
+                    <div class="customer-profile-card">
+
+                        <span class="customer-profile-label">
+
+                            RETURNS
+
+                        </span>
+
+
+                        <h4>
+
+                            No Returns Yet
+
+                        </h4>
+
+
+                        <p>
+
+                            You don't have any
+                            return requests.
+
+                        </p>
+
+
+                        <a
+                            href="/customer-orders"
+                            class="btn btn-dark">
+
+                            View My Orders
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* =========================
+           DISPLAY RETURNS
+        ========================= */
+
+        returns.forEach(item => {
+
+            container.innerHTML += `
+
+                <div class="col-lg-6 col-md-12">
+
+                    <div class="customer-profile-card">
+
+
+                        <span
+                            class="customer-profile-label">
+
+                            RETURN #${item.id}
+
+                        </span>
+
+
+                        <h4>
+
+                            ORDER #${item.order_id}
+
+                        </h4>
+
+
+                        <p>
+
+                            <strong>
+                                Order Total:
+                            </strong>
+
+                            ₹${item.total}
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Reason:
+                            </strong>
+
+                            ${item.reason}
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Status:
+                            </strong>
+
+                            ${item.status}
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Return Date:
+                            </strong>
+
+                            ${item.return_date}
+
+                        </p>
+
+
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Error loading returns:",
+            error
+        );
+
+
+        document.getElementById(
+            "returns-container"
+        ).innerHTML = `
+
+            <div class="col-12 text-center">
+
+                <div class="customer-profile-card">
+
+                    <h4>
+                        Unable to Load Returns
+                    </h4>
+
+                    <p>
+                        Please try again later.
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+loadReturns();
+
+</script>
+
+
+</body>
+
+</html>

@@ -123,19 +123,37 @@
                     </li>
 
 
-                    <!-- OWNER LOGIN -->
+                  <!-- CUSTOMER ACCOUNT -->
 
-                    <li class="nav-item ms-2">
+{% if customer_logged_in %}
 
-                        <a 
-                            class="btn btn-warning"
-                            href="/owner-login">
+<li class="nav-item ms-2">
 
-                            Owner Login
+    <a
+        class="btn btn-warning"
+        href="/customer-account">
 
-                        </a>
+        My Account
 
-                    </li>
+    </a>
+
+</li>
+
+{% else %}
+
+<li class="nav-item ms-2">
+
+    <a
+        class="btn btn-warning"
+        href="/customer-login">
+
+        Login / Sign Up
+
+    </a>
+
+</li>
+
+{% endif %}
 
 
                 </ul>
