@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>All Products | Sun Auto Centre</title>
 
@@ -11,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
@@ -21,10 +22,10 @@
 
         <div class="container">
 
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
 
                 <img
-                    src="../static/img/logo.png"
+                    src="{{ url_for('static', filename='img/logo.png') }}"
                     alt="Sun Auto Centre Logo"
                     class="logo"
                 >
@@ -46,31 +47,34 @@
                 <ul class="navbar-nav ms-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="home.html">Home</a>
+                        <a class="nav-link" href="/">Home</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="products.html">
+                        <a class="nav-link active" href="/products">
                             Products
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="home.html#brands">                            
+                        <a class="nav-link" href="/#brands">
                             Brands
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="home.html#contact">
+                        <a class="nav-link" href="/#contact">
                             Contact
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="cart.html">
+                        <a class="nav-link cart-link" href="/cart">
                         🛒 Cart (<span id="cart-count">0</span>)
                         </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-warning" href="/customer-account">My Account</a>
                     </li>
 
                 </ul>
@@ -159,7 +163,7 @@
 
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../static/js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 

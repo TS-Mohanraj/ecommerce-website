@@ -1,269 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Shopping Cart | Sun Auto Centre</title>
-
-    <!-- Bootstrap CSS -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Your Cart | Sun Auto Centre</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
-
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
-
         <div class="container">
-
-            <a class="navbar-brand" href="home.html">
-                <img src="../static/img/logo.png"
-                     alt="Sun Auto Centre Logo"
-                     class="logo">
-            </a>
-
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav">
-
-                <span class="navbar-toggler-icon"></span>
-
-            </button>
-
+            <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="Sun Auto Centre" class="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
-
                 <ul class="navbar-nav ms-auto">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html">
-                            Home
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="products.html">
-                            Products
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html#brands">
-                            Brands
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html#contact">
-                            Contact
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link active" href="cart.html">
-                            🛒 Cart (<span id="cart-count">0</span>)
-                        </a>
-                    </li>
-                    
-
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link cart-link active" href="/cart">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li class="nav-item ms-2"><a class="btn btn-warning" href="/customer-account">My Account</a></li>
                 </ul>
-
             </div>
-
         </div>
-
     </nav>
-
-
-    <!-- Cart Section -->
-
-    <main>
-
-        <section class="products-section">
-
-            <div class="container">
-
-                <h1 class="text-center mb-5">
-                    Your Shopping Cart
-                </h1>
-
-
-                <!-- Cart Items -->
-
-                <div id="cart-items">
-
-                    <!-- Products will appear here -->
-
+    <main class="products-section">
+        <div class="container">
+            <h1 class="text-center mb-5">Your Shopping Cart</h1>
+            <div id="cart-message" class="alert d-none" role="alert"></div>
+            <div id="cart-items" class="mb-4"></div>
+            <div id="cart-summary" class="cart-summary">
+                <h2>Order Summary</h2>
+                <div class="order-details">
+                    <div class="summary-row"><span>Items</span><span id="cart-items-count">0</span></div>
+                    <div class="summary-row"><span>Subtotal</span><span id="cart-subtotal">₹0</span></div>
+                    <div class="summary-row"><span>Delivery</span><span>FREE</span></div>
+                    <hr>
+                    <div class="summary-total"><span>Total</span><span id="cart-total">₹0</span></div>
                 </div>
-
-
-                <!-- Cart Summary -->
-
-                <div id="cart-summary" class="cart-summary">
-
-                    <h2>Order Summary</h2>
-
-                    <div class="order-details">
-
-                        <div class="summary-row">
-                            <span>Items</span>
-                            <span id="cart-items-count">0</span>
-                        </div>
-
-                        <div class="summary-row">
-                            <span>Subtotal</span>
-                            <span id="cart-subtotal">₹0</span>
-                        </div>
-
-                        <div class="summary-row">
-                            <span>Delivery</span>
-                            <span>FREE</span>
-                        </div>
-
-                        <hr>
-
-                        <div class="summary-total">
-                            <span>Total</span>
-                            <span id="cart-total">₹0</span>
-                        </div>
-
-                    </div>
-
-
-                    <!-- Customer Details -->
-
-                    <div class="customer-details">
-
-                        <h3>Customer Details</h3>
-
-                        <div class="mb-3">
-
-                            <label for="customer-name">
-                                Name
-                            </label>
-
-                            <input
-                                type="text"
-                                id="customer-name"
-                                class="form-control"
-                                placeholder="Enter your name"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="mb-3">
-
-                            <label for="customer-phone">
-                                Mobile Number
-                            </label>
-
-                            <input
-                                type="tel"
-                                id="customer-phone"
-                                class="form-control"
-                                placeholder="Enter your mobile number"
-                                maxlength="10"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="mb-3">
-
-                            <label for="customer-address">
-                                Delivery Address
-                            </label>
-
-                            <textarea
-                                id="customer-address"
-                                class="form-control"
-                                rows="3"
-                                placeholder="Enter your delivery address"
-                                required
-                            ></textarea>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Place Order -->
-
-                    <button
-                        id="place-order-btn"
-                        class="btn btn-warning btn-lg">
-
-                        Place Order
-
-                    </button>
-
+                <div class="customer-details mt-4">
+                    <label for="delivery-address" class="form-label">Delivery Address</label>
+                    <textarea id="delivery-address" class="form-control" rows="3" maxlength="500" required></textarea>
                 </div>
-
-
-                <!-- Empty Cart -->
-
-                <div id="empty-cart"
-                     class="text-center">
-
-                    <h3>Your cart is empty</h3>
-
-                    <p>
-                        Add some products to your cart first.
-                    </p>
-
-                    <a href="products.html"
-                       class="btn btn-warning">
-
-                        Browse Products
-
-                    </a>
-
-                </div>
-
+                <button id="place-order-btn" class="btn btn-warning btn-lg mt-3">Place Order</button>
             </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- Footer -->
-
-    <footer>
-
-        <div class="container text-center">
-
-            <h4>SUN AUTO CENTRE</h4>
-
-            <p>
-                Two-Wheeler Accessories, Lubricants & Genuine Products
-            </p>
-
-            <p>
-                © 2026 Sun Auto Centre. All Rights Reserved.
-            </p>
-
+            <div id="empty-cart" class="text-center d-none">
+                <h3>Your cart is empty</h3>
+                <p>Add some products to your cart first.</p>
+                <a href="/products" class="btn btn-warning">Browse Products</a>
+            </div>
         </div>
-
-    </footer>
-
-
-    <!-- Bootstrap JavaScript -->
-
+    </main>
+    <footer><div class="container text-center"><h4>SUN AUTO CENTRE</h4><p>Two-Wheeler Accessories, Lubricants & Genuine Products</p><p>© 2026 Sun Auto Centre. All Rights Reserved.</p></div></footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Custom JavaScript -->
-
-    <script src="../static/js/script.js"></script>
-
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
-
 </html>

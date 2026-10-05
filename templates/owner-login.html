@@ -1,189 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Owner Login | Sun Auto Centre</title>
-
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Admin Login | Sun Auto Centre</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
-
-    <div class="container">
-
-        <div class="row justify-content-center mt-5">
-
-            <div class="col-md-5">
-
-                <div class="card shadow">
-
-                    <div class="card-body p-4">
-
-                        <h2 class="text-center mb-4">
-                            Owner Login
-                        </h2>
-
-
-                        <form id="loginForm">
-
-                            <div class="mb-3">
-
-                                <label class="form-label">
-                                    Username
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="username"
-                                    class="form-control"
-                                    placeholder="Enter username"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <div class="mb-3">
-
-                                <label class="form-label">
-                                    Password
-                                </label>
-
-                                <input
-                                    type="password"
-                                    id="password"
-                                    class="form-control"
-                                    placeholder="Enter password"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <button
-                                type="submit"
-                                class="btn btn-warning w-100">
-
-                                Login
-
-                            </button>
-
-                        </form>
-
-
-                        <p
-                            id="loginMessage"
-                            class="text-center mt-3">
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- LOGIN JAVASCRIPT -->
-    <script>
-
-        document
-            .getElementById("loginForm")
-            .addEventListener("submit", async function(event) {
-
-                event.preventDefault();
-
-
-                const username =
-                    document.getElementById("username").value;
-
-                const password =
-                    document.getElementById("password").value;
-
-                const message =
-                    document.getElementById("loginMessage");
-
-
-                try {
-
-                    const response = await fetch(
-                        "/api/owner/login",
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-                                username: username,
-                                password: password
-                            })
-                        }
-                    );
-
-
-                    const result =
-                        await response.json();
-
-
-                    if (response.ok) {
-
-                        message.className =
-                            "text-success text-center mt-3";
-
-                        message.textContent =
-                            result.message;
-
-
-                        setTimeout(() => {
-
-                            window.location.href =
-                                "/owner-dashboard";
-
-                        }, 1000);
-
-
-                    } else {
-
-                        message.className =
-                            "text-danger text-center mt-3";
-
-                        message.textContent =
-                            result.error;
-
-                    }
-
-
-                } catch (error) {
-
-                    console.error(error);
-
-                    message.className =
-                        "text-danger text-center mt-3";
-
-                    message.textContent =
-                        "Unable to connect to server.";
-
-                }
-
-            });
-
-    </script>
-
+    <main class="container py-5">
+        <div class="row justify-content-center"><div class="col-md-5">
+            <div class="card shadow"><div class="card-body p-4">
+                <h1 class="h3 text-center mb-4">Administrator Login</h1>
+                <form id="admin-login-form">
+                    <div class="mb-3"><label class="form-label" for="username">Username</label><input class="form-control" id="username" autocomplete="username" required></div>
+                    <div class="mb-3"><label class="form-label" for="password">Password</label><input class="form-control" id="password" type="password" autocomplete="current-password" required></div>
+                    <button class="btn btn-warning w-100" type="submit">Log in</button>
+                </form>
+                <div id="admin-login-message" class="alert d-none mt-3" role="alert"></div>
+                <p class="small text-muted mt-3 mb-0">First-time setup: run <code>flask --app app create-admin</code> in the project folder.</p>
+                <a class="d-block text-center mt-3" href="/">Return to Sun Auto Centre</a>
+            </div></div>
+        </div></div>
+    </main>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 </body>
-
 </html>
