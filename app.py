@@ -4,6 +4,7 @@ import os
 import re
 import secrets
 import sqlite3
+import psycopg2
 from datetime import datetime, timedelta, timezone
 from functools import wraps
 from pathlib import Path
@@ -40,9 +41,15 @@ def _persistent_secret() -> str:
 
 def create_app(test_config: dict[str, Any] | None = None) -> Flask:
     application = Flask(__name__, instance_path=str(INSTANCE_DIR))
+
+    if os.path.exists('/data'):
+        db_path = '/data/products.db'
+    else:
+        db_path = str(DEFAULT_DATABASE)
+
     application.config.from_mapping(
         SECRET_KEY=_persistent_secret(),
-        DATABASE=str(DEFAULT_DATABASE),
+        DATABASE=str(db_path),
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SAMESITE="Lax",
         SESSION_COOKIE_SECURE=os.environ.get("COOKIE_SECURE", "").lower() == "true",

@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import os
 import sqlite3
+import psycopg2
 from pathlib import Path
 
 from werkzeug.security import generate_password_hash
