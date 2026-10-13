@@ -54,26 +54,25 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
     if test_config:
         application.config.update(test_config)
     # --- INTHA IF-ELSE CONDITION-AH MATTUM PODUNGA ---
-    DATABASE_URL = os.environ.get('DATABASE_URL')
-    if DATABASE_URL:
-        print("Neon DB Detected! Skipping local sqlite init.")
-    else:
+    DATABASE_URL = os.environ.get("DATABASE_URL")
+
+    if not DATABASE_URL:
         initialize_database(application.config["DATABASE"])
 
+    def connection() -> Any:
+        if "db" not in g:
+            if DATABASE_URL:
+                from store import get_db_connection
+                g.db = get_db_connection()
+            else:
+                db = sqlite3.connect(application.config["DATABASE"], timeout=10)
+                db.row_factory = sqlite3.Row
+                db.execute("PRAGMA foreign_keys = ON")
+                db.execute("PRAGMA busy_timeout = 10000")
+                g.db = db
+        return g.db
 
-        def connection() -> Any:
-            if "db" not in g:
-                if DATABASE_URL:
-                    from store import get_db_connection
-                    g.db = get_db_connection()
-                else:
-                    db = sqlite3.connect(application.config["DATABASE"], timeout=10)
-                    db.row_factory = sqlite3.Row
-                    db.execute("PRAGMA foreign_keys = ON")
-                    db.execute("PRAGMA busy_timeout = 10000")
-                    g.db = db
-            return g.db
-        application.extensions["db_connection"] = connection
+    application.extensions["db_connection"] = connection
 
     @application.teardown_appcontext
     def close_connection(_error: BaseException | None = None) -> None:
