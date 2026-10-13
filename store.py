@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 import sqlite3
 import psycopg2
+from psycopg2.extras import DictCursor
 from pathlib import Path
 
 from werkzeug.security import generate_password_hash
@@ -34,6 +35,17 @@ PRODUCTS = (
     ("ACCESSORIES", "Motorcycle Foot Mat", "Durable foot mat designed for improved comfort and protection.", 499, "footmat.jpg"),
     ("ACCESSORIES", "Motorcycle Luggage Accessories", "Useful luggage accessories designed for carrying items safely.", 1499, "lugguage accessaaries.jpg"),
 )
+
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+def get_db_connection():
+    if DATABASE_URL:
+        from psycopg2.extras import DictCursor
+        return psycopg2.connect(DATABASE_URL, cursor_factory=DictCursor)
+    else:
+        conn = sqlite3.connect('database.db')
+        conn.row_factory = sqlite3.Row
+        return conn
 
 
 def _columns(connection: sqlite3.Connection, table: str) -> set[str]:
