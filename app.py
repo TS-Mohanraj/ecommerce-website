@@ -58,7 +58,13 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
     )
     if test_config:
         application.config.update(test_config)
-    initialize_database(application.config["DATABASE"])
+    # --- INTHA IF-ELSE CONDITION-AH MATTUM PODUNGA ---
+    DATABASE_URL = os.environ.get('DATABASE_URL')
+    if DATABASE_URL:
+        print("Neon DB Detected! Skipping local sqlite init.")
+    else:
+        initialize_database(application.config["DATABASE"])
+
 
     def connection() -> sqlite3.Connection:
         if "db" not in g:
