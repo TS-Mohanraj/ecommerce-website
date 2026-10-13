@@ -61,14 +61,19 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
         initialize_database(application.config["DATABASE"])
 
 
-    def connection() -> sqlite3.Connection:
-        if "db" not in g:
-            db = sqlite3.connect(application.config["DATABASE"], timeout=10)
-            db.row_factory = sqlite3.Row
-            db.execute("PRAGMA foreign_keys = ON")
-            db.execute("PRAGMA busy_timeout = 10000")
-            g.db = db
-        return g.db
+        def connection() -> Any:
+            if "db" not in g:
+                if DATABASE_URL:
+                    from store import get_db_connection
+                    g.db = get_db_connection()
+                else:
+                    db = sqlite3.connect(application.config["DATABASE"], timeout=10)
+                    db.row_factory = sqlite3.Row
+                    db.execute("PRAGMA foreign_keys = ON")
+                    db.execute("PRAGMA busy_timeout = 10000")
+                    g.db = db
+            return g.db
+        application.extensions["db_connection"] = connection
 
     @application.teardown_appcontext
     def close_connection(_error: BaseException | None = None) -> None:
@@ -86,6 +91,7 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
         return token
 
     @application.context_processor
+
     def template_context() -> dict[str, Any]:
         return {
             "csrf_token": csrf_token,
