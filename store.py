@@ -36,16 +36,73 @@ PRODUCTS = (
     ("ACCESSORIES", "Motorcycle Luggage Accessories", "Useful luggage accessories designed for carrying items safely.", 1499, "lugguage accessaaries.jpg"),
 )
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+class _Cursor:
+    def __init__(self, cur, lastrowid=None):
+        self._cur = cur
+        self.lastrowid = lastrowid
+
+    def fetchone(self):
+        return self._cur.fetchone()
+
+    def fetchall(self):
+        return self._cur.fetchall()
+
+    @property
+    def rowcount(self):
+        return self._cur.rowcount
+
+
+class PgConnection:
+    """Lets the SQLite-style code in app.py run on Postgres."""
+
+    def __init__(self, conn):
+        self._conn = conn
+
+    def execute(self, sql, params=()):
+        stripped = sql.strip()
+        upper = stripped.upper()
+        if upper.startswith("BEGIN"):
+            return _Cursor(self._conn.cursor())  # psycopg2 begins automatically
+        sql = stripped.replace("?", "%s")
+        is_insert = upper.startswith("INSERT") and "RETURNING" not in upper
+        if is_insert:
+            sql = sql.rstrip(";") + " RETURNING id"
+        cur = self._conn.cursor()
+        cur.execute(sql, params)
+        lastrowid = None
+        if is_insert:
+            row = cur.fetchone()
+            lastrowid = row[0] if row else None
+        return _Cursor(cur, lastrowid)
+
+    def commit(self):
+        self._conn.commit()
+
+    def rollback(self):
+        self._conn.rollback()
+
+    def close(self):
+        self._conn.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc, tb):
+        if exc_type:
+            self._conn.rollback()
+        else:
+            self._conn.commit()
+        return False
+
 
 def get_db_connection():
     if DATABASE_URL:
-        from psycopg2.extras import DictCursor
-        return psycopg2.connect(DATABASE_URL, cursor_factory=DictCursor)
-    else:
-        conn = sqlite3.connect('database.db')
-        conn.row_factory = sqlite3.Row
-        return conn
+        return PgConnection(psycopg2.connect(DATABASE_URL, cursor_factory=DictCursor))
+    conn = sqlite3.connect("database.db")
+    conn.row_factory = sqlite3.Row
+    return conn
 
 
 def _columns(connection: sqlite3.Connection, table: str) -> set[str]:

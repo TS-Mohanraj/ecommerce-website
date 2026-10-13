@@ -16,6 +16,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from store import initialize_database
 
+DB_INTEGRITY_ERRORS = (sqlite3.IntegrityError, psycopg2.IntegrityError)
+DB_ERRORS = (sqlite3.Error, psycopg2.Error)
+
 
 BASE_DIR = Path(__file__).resolve().parent
 DEFAULT_DATABASE = BASE_DIR / "database" / "products.db"
@@ -374,7 +377,7 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
                     (user_id, name, phone, address),
                 )
                 db.execute("INSERT INTO cart (user_id) VALUES (?)", (user_id,))
-        except sqlite3.IntegrityError:
+        except DB_INTEGRITY_ERRORS:
             return api_error("That mobile number is already registered.", 409)
         return jsonify({"message": "Registration successful. Please log in."}), 201
 
@@ -467,7 +470,7 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
                     """,
                     (name, phone, address, current_user_id()),
                 )
-        except sqlite3.IntegrityError:
+        except DB_INTEGRITY_ERRORS:
             return api_error("That mobile number is already registered.", 409)
         session["user_name"] = name
         return jsonify({"message": "Profile updated successfully."})
@@ -553,7 +556,7 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
                         (cart_id, product_id, quantity),
                     )
                 db.execute("UPDATE cart SET updated_at = CURRENT_TIMESTAMP WHERE id = ?", (cart_id,))
-        except sqlite3.IntegrityError:
+        except DB_INTEGRITY_ERRORS:
             return api_error("Unable to add this product to the cart.", 409)
         return jsonify({"message": "Added to cart."}), 201
 
@@ -662,7 +665,7 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
                 (current_user_id(),),
             )
             db.commit()
-        except sqlite3.Error:
+        except DB_ERRORS:
             db.rollback()
             application.logger.exception("Checkout transaction failed for customer %s.", current_user_id())
             return api_error("Unable to place the order. Please try again.", 500)
@@ -744,10 +747,10 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
                 (order_id, current_user_id(), current_user_id(), reason),
             )
             db.commit()
-        except sqlite3.IntegrityError:
+        except DB_INTEGRITY_ERRORS:
             db.rollback()
             return api_error("A return request already exists for this order.", 409)
-        except sqlite3.Error:
+        except DB_ERRORS:
             db.rollback()
             application.logger.exception("Return request creation failed for order %s.", order_id)
             return api_error("Unable to submit the return request.", 500)
@@ -802,7 +805,7 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
                     """,
                     values,
                 ).lastrowid
-        except sqlite3.IntegrityError:
+        except DB_INTEGRITY_ERRORS:
             return api_error("Unable to create product. Check that its details are unique and valid.", 409)
         return jsonify({"message": "Product created.", "id": product_id}), 201
 
@@ -950,7 +953,7 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
                 (status, status, delivered_at, order_id),
             )
             db.commit()
-        except sqlite3.Error:
+        except DB_ERRORS:
             db.rollback()
             application.logger.exception("Unable to update status for order %s.", order_id)
             return api_error("Unable to update order status.", 500)
@@ -1021,7 +1024,7 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
                     """,
                     (username, f"admin:{username}", username, generate_password_hash(password)),
                 )
-        except sqlite3.IntegrityError:
+        except DB_INTEGRITY_ERRORS:
             raise click.ClickException("That administrator username already exists.") from None
         click.echo(f"Administrator '{username}' created.")
 
